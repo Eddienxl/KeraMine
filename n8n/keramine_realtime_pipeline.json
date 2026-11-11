@@ -1,0 +1,130 @@
+{
+  "name": "KeraMine Real-Time B2B Association Pipeline",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "keramine-ingest",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node-webhook-trigger",
+      "name": "Webhook: Pesanan B2B Baru",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [220, 300],
+      "webhookId": "keramine-ingest-hook"
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "node-cron-trigger",
+      "name": "Schedule: Periodic SOTA Audit",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [220, 520]
+    },
+    {
+      "parameters": {
+        "jsCode": "const input = $input.first().json;\nconst body = input.body || input;\n\nconst toko = String(body.target_toko || 'KUNCI SUKSES, TOKO').trim().toUpperCase();\nconst pof = String(body.target_pof || 'DIAN').trim().toUpperCase();\nconst rawSeris = Array.isArray(body.bundle_seris)\n  ? body.bundle_seris\n  : String(body.bundle_seris || 'DIEGO,GRANIT').split(',');\n\nconst cleanSeris = rawSeris.map(s => String(s).trim().toUpperCase()).filter(Boolean);\nconst qty = Math.max(1, Number(body.qty_per_item) || 60);\nconst repeat = Math.min(20, Math.max(1, Number(body.repeat_baskets) || 1));\n\nreturn [{\n  json: {\n    target_toko: toko,\n    target_pof: pof,\n    bundle_seris: cleanSeris.length ? cleanSeris : ['DIEGO', 'GRANIT'],\n    qty_per_item: qty,\n    repeat_baskets: repeat,\n    auto_remine: true\n  }\n}];"
+      },
+      "id": "node-normalize-js",
+      "name": "Normalize & Validate Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [470, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8001/api/simulate-transactions",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "id": "node-fastapi-ingest",
+      "name": "FastAPI: Ingest & SOTA Remine",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [720, 300],
+      "retryOnFail": true,
+      "maxTries": 3
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://127.0.0.1:8001/api/mine",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"basket_type\": \"store_month\", \"item_level\": \"SERI\", \"algorithm\": \"apriori\", \"triggered_by\": \"n8n_cron_schedule\", \"persist_to_supabase\": true, \"data_source\": \"supabase\"}",
+        "options": {
+          "timeout": 20000
+        }
+      },
+      "id": "node-cron-mine",
+      "name": "FastAPI: Scheduled Remine",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [470, 520],
+      "retryOnFail": true,
+      "maxTries": 2
+    },
+    {
+      "parameters": {
+        "jsCode": "const res = $input.first().json;\nconst remine = res.remine || res.meta || {};\nconst top = (res.top_rules_after || res.top_rules || []).slice(0, 5).map(r => ({\n  rule: `${r.antecedents_str} -> ${r.consequents_str}`,\n  confidence_pct: Number((r.confidence * 100).toFixed(2)),\n  lift: Number(r.lift.toFixed(3)),\n  zhang: Number(r.zhang_metric.toFixed(3)),\n  avg_dus: Number(r.avg_qty_dus.toFixed(1)),\n  p_fisher: r.p_value_fisher\n}));\n\nreturn [{\n  json: {\n    pipeline: 'n8n -> FastAPI -> Supabase',\n    status: 'synced',\n    batch_tag: res.batch_tag || 'cron_audit',\n    inserted_transactions: res.inserted_transactions || 0,\n    total_baskets: remine.total_baskets || 0,\n    rules_found: remine.rules_found || 0,\n    significant_rules: remine.significant_rules || 0,\n    exec_time_ms: remine.exec_time_ms || 0,\n    top_5_significant_rules: top,\n    timestamp: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "node-format-digest",
+      "name": "Format Sales Bundling Digest",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [970, 380]
+    },
+    {
+      "parameters": {
+        "respondWith": "firstIncomingItem",
+        "options": {}
+      },
+      "id": "node-respond-webhook",
+      "name": "Respond to Caller (Laravel/Streamlit)",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1220, 300]
+    }
+  ],
+  "connections": {
+    "Webhook: Pesanan B2B Baru": {
+      "main": [[{"node": "Normalize & Validate Payload", "type": "main", "index": 0}]]
+    },
+    "Normalize & Validate Payload": {
+      "main": [[{"node": "FastAPI: Ingest & SOTA Remine", "type": "main", "index": 0}]]
+    },
+    "FastAPI: Ingest & SOTA Remine": {
+      "main": [[{"node": "Format Sales Bundling Digest", "type": "main", "index": 0}]]
+    },
+    "Schedule: Periodic SOTA Audit": {
+      "main": [[{"node": "FastAPI: Scheduled Remine", "type": "main", "index": 0}]]
+    },
+    "FastAPI: Scheduled Remine": {
+      "main": [[{"node": "Format Sales Bundling Digest", "type": "main", "index": 0}]]
+    },
+    "Format Sales Bundling Digest": {
+      "main": [[{"node": "Respond to Caller (Laravel/Streamlit)", "type": "main", "index": 0}]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}
+

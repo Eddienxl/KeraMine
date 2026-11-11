@@ -1,0 +1,140 @@
+{
+  "dataset_source": "datasetarule.xlsx",
+  "excel_sheet_dimension_note": "A1:J16001 (16.000 baris data XML dengan 14 trailing blank rows yang dipangkas reader -> 15.986 baris aktif)",
+  "active_rows_total": 15986,
+  "blank_rows_internal": 0,
+  "exact_duplicates": 0,
+  "duplicate_nota_collisions": [
+    {
+      "nota": "JL*7211.3746",
+      "count": 2,
+      "rows": [
+        {
+          "excel_row": "1425",
+          "NAMA": "EKA JAYA, TOKO",
+          "NAMABARA": "FRISTA BLUISH 25X40",
+          "TGL": "2022-09-16",
+          "QTY": "24",
+          "MERK": "FORTUNER",
+          "POF": "BARI"
+        },
+        {
+          "excel_row": "11276",
+          "NAMA": "DR BANGUNAN & GYPSUM",
+          "NAMABARA": "CRUSO GOLD 50X50",
+          "TGL": "2023-07-31",
+          "QTY": "71",
+          "MERK": "EFL",
+          "POF": "JONI"
+        }
+      ]
+    }
+  ],
+  "positive_transactions_count": 15840,
+  "returns_zero_qty_count": 146,
+  "date_range": {
+    "min": "2022-08-01",
+    "max": "2023-12-30",
+    "unique_months": 17
+  },
+  "total_qty_dus_positive": 794064.0,
+  "avg_qty_dus_per_line": 50.13,
+  "median_qty_dus_per_line": 50.0,
+  "unique_counts": {
+    "stores": 237,
+    "skus": 438,
+    "merks_raw": 22,
+    "merks_clean": 21,
+    "ukurans": 8,
+    "seris": 220,
+    "merk_ukurans": 168,
+    "pofs": 4
+  },
+  "typo_normalization": {
+    "PISSCASO_to_PICASSO_rows": 725
+  },
+  "non_standard_size_skus": [
+    "GRANIT CREAM POLOS NA 703",
+    "GRANIT HITAM NA 6299"
+  ],
+  "pof_summary": [
+    {
+      "pof": "BARI",
+      "transactions": 3919,
+      "total_qty_dus": 197746,
+      "unique_stores": 237
+    },
+    {
+      "pof": "DIAN",
+      "transactions": 4030,
+      "total_qty_dus": 200628,
+      "unique_stores": 237
+    },
+    {
+      "pof": "JONI",
+      "transactions": 3921,
+      "total_qty_dus": 195201,
+      "unique_stores": 237
+    },
+    {
+      "pof": "ROBBY",
+      "transactions": 3970,
+      "total_qty_dus": 200489,
+      "unique_stores": 237
+    }
+  ],
+  "basket_granularity_comparison": [
+    {
+      "definisi_keranjang": "NOTA (Faktur Baris)",
+      "total_basket": 15839,
+      "multi_item_basket": 1,
+      "rasio_multi_item_pct": 0.01,
+      "rata_rata_item": 1.0,
+      "maks_item": 2
+    },
+    {
+      "definisi_keranjang": "Toko + Hari",
+      "total_basket": 14874,
+      "multi_item_basket": 927,
+      "rasio_multi_item_pct": 6.23,
+      "rata_rata_item": 1.06,
+      "maks_item": 4
+    },
+    {
+      "definisi_keranjang": "Toko + Minggu",
+      "total_basket": 10475,
+      "multi_item_basket": 4032,
+      "rasio_multi_item_pct": 38.49,
+      "rata_rata_item": 1.51,
+      "maks_item": 6
+    },
+    {
+      "definisi_keranjang": "Toko + Bulan",
+      "total_basket": 3949,
+      "multi_item_basket": 3654,
+      "rasio_multi_item_pct": 92.53,
+      "rata_rata_item": 3.99,
+      "maks_item": 12
+    },
+    {
+      "definisi_keranjang": "Toko Total (17 Bulan)",
+      "total_basket": 237,
+      "multi_item_basket": 237,
+      "rasio_multi_item_pct": 100.0,
+      "rata_rata_item": 62.03,
+      "maks_item": 83
+    }
+  ],
+  "null_counts_active_raw": {
+    "NAMA": 0,
+    "NAMABARA": 0,
+    "TGL": 0,
+    "NOTA": 0,
+    "QTY": 0,
+    "SATUAN": 0,
+    "KODE": 0,
+    "KODEBARA": 0,
+    "POF": 0,
+    "MERK": 0
+  }
+}

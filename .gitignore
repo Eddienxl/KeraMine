@@ -1,0 +1,66 @@
+# OS & Editor Artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+*.tmp
+*.bak
+*.swp
+.vscode/
+.idea/
+.zed/
+.agents/
+
+# Secrets & Environment Files (NEVER commit real keys)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+keramine-lab/.streamlit/secrets.toml
+
+# Python / Streamlit / Jupyter
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.pyrefly_cache/
+.ipynb_checkpoints/
+.venv/
+
+# Notebook Export Archives (extracted artifacts live in data/clean/ & assets/figures/)
+notebooks/*.zip
+
+# Node / n8n Local State
+node_modules/
+.n8n/
+
+# Laravel (keramine-laravel)
+keramine-laravel/vendor/
+keramine-laravel/node_modules/
+keramine-laravel/public/build/
+keramine-laravel/public/hot
+keramine-laravel/public/storage
+keramine-laravel/.env
+keramine-laravel/.env.backup
+keramine-laravel/.env.production
+keramine-laravel/.phpunit.result.cache
+keramine-laravel/.phpunit.cache/
+keramine-laravel/auth.json
+keramine-laravel/database/*.sqlite*
+!keramine-laravel/database/migrations/
+!keramine-laravel/database/seeders/
+keramine-laravel/storage/app/certs/
+keramine-laravel/storage/*.key
+keramine-laravel/storage/logs/*.log
+keramine-laravel/storage/pail/
+keramine-laravel/storage/framework/cache/data/*
+!keramine-laravel/storage/framework/cache/data/.gitignore
+keramine-laravel/storage/framework/sessions/*
+!keramine-laravel/storage/framework/sessions/.gitignore
+keramine-laravel/storage/framework/views/*
+!keramine-laravel/storage/framework/views/.gitignore
+keramine-laravel/bootstrap/cache/*.php
+
+# Coursework Textbook & Lecture Notes (non-project reference folder)
+North Association Rule/

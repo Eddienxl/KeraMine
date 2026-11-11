@@ -1,0 +1,45 @@
+{
+  "train_cutoff": "2023-09",
+  "top_k": 5,
+  "evaluations": [
+    {
+      "item_level": "MERK",
+      "train_baskets": 3255,
+      "test_multi_baskets": 634,
+      "train_rules_count": 347,
+      "arm_coverage_pct": 100.0,
+      "hit_rate_at_5_arm_only_pct": 53.63,
+      "hit_rate_at_5_popularity_pct": 63.25,
+      "hit_rate_at_5_hybrid_pct": 66.25,
+      "precision_at_5_arm_pct": 14.16,
+      "precision_at_5_popularity_pct": 17.03,
+      "precision_at_5_hybrid_pct": 19.94
+    },
+    {
+      "item_level": "MERK_UKURAN",
+      "train_baskets": 3255,
+      "test_multi_baskets": 638,
+      "train_rules_count": 154,
+      "arm_coverage_pct": 80.25,
+      "hit_rate_at_5_arm_only_pct": 11.76,
+      "hit_rate_at_5_popularity_pct": 30.09,
+      "hit_rate_at_5_hybrid_pct": 31.5,
+      "precision_at_5_arm_pct": 2.51,
+      "precision_at_5_popularity_pct": 6.8,
+      "precision_at_5_hybrid_pct": 7.12
+    },
+    {
+      "item_level": "SERI",
+      "train_baskets": 3255,
+      "test_multi_baskets": 636,
+      "train_rules_count": 143,
+      "arm_coverage_pct": 44.03,
+      "hit_rate_at_5_arm_only_pct": 3.14,
+      "hit_rate_at_5_popularity_pct": 19.18,
+      "hit_rate_at_5_hybrid_pct": 18.71,
+      "precision_at_5_arm_pct": 0.63,
+      "precision_at_5_popularity_pct": 4.12,
+      "precision_at_5_hybrid_pct": 3.99
+    }
+  ]
+}

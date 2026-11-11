@@ -1,0 +1,1238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laporan Proyek UAS Analisis Data Mining (ADAMIN) - KeraMine - Teknik Informatika UIN Suska Riau</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 4cm 3cm 3cm 4cm; /* Atas 4cm, Bawah 3cm, Kanan 3cm, Kiri 4cm (Standar TIF UIN Suska) */
+        }
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 12pt;
+            line-height: 1.5;
+            color: #000;
+            margin: 0 auto;
+            max-width: 820px;
+            padding: 40px;
+            background: #fff;
+        }
+        @media screen {
+            body {
+                background: #f4f6f8;
+                padding: 20px;
+            }
+            .document-container {
+                background: #fff;
+                padding: 4cm 3cm 3cm 4cm;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+                border-radius: 4px;
+            }
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Times New Roman', Times, serif;
+            font-weight: bold;
+            color: #000;
+        }
+        h1.title {
+            text-align: center;
+            font-size: 14pt;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+        h2.chapter-title {
+            text-align: center;
+            font-size: 16pt;
+            text-transform: uppercase;
+            margin-top: 45px;
+            margin-bottom: 25px;
+            line-height: 1.3;
+        }
+        h3.section-title {
+            font-size: 14pt;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+        }
+        h4.subsection-title {
+            font-size: 12pt;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+        h5.subsubsection-title {
+            font-size: 12pt;
+            margin-top: 14px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            font-style: italic;
+        }
+        p {
+            text-align: justify;
+            text-indent: 1.2cm;
+            margin-top: 0;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        p.no-indent {
+            text-indent: 0;
+        }
+        .ref-item {
+            text-align: justify;
+            text-indent: -1.2cm;
+            padding-left: 1.2cm;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+        ul, ol {
+            margin-top: 0;
+            margin-bottom: 12px;
+            padding-left: 1.2cm;
+            text-align: justify;
+            line-height: 1.5;
+        }
+        li {
+            margin-bottom: 6px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 6px 0 22px 0;
+            font-size: 10.5pt;
+            line-height: 1.3;
+            page-break-inside: auto;
+        }
+        thead {
+            display: table-header-group;
+        }
+        tr {
+            page-break-inside: avoid;
+            page-break-after: auto;
+        }
+        table, th, td {
+            border: 1px solid #000;
+        }
+        th {
+            background-color: #f2f2f2;
+            padding: 7px 8px;
+            text-align: center;
+            font-weight: bold;
+        }
+        td {
+            padding: 6px 8px;
+            vertical-align: top;
+        }
+        .caption {
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: left;
+            margin-top: 20px;
+            margin-bottom: 6px;
+            line-height: 1.3;
+            page-break-after: avoid;
+        }
+        .caption-figure {
+            font-size: 10pt;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 8px;
+            margin-bottom: 18px;
+            line-height: 1.3;
+        }
+        .figure-block {
+            text-align: center;
+            margin: 16px 0;
+            break-inside: avoid;
+            page-break-inside: avoid;
+        }
+        .figure-block img {
+            max-width: 100%;
+            max-height: 460px;
+            width: auto;
+            height: auto;
+            border-radius: 4px;
+        }
+        .formula-box {
+            background: #fafafa;
+            border-left: 3px solid #000;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 11pt;
+            text-align: center;
+        }
+        .cover-page {
+            text-align: center;
+            margin-bottom: 60px;
+            page-break-after: always;
+        }
+        .toc-section {
+            margin-top: 30px;
+            margin-bottom: 40px;
+            page-break-after: always;
+        }
+        .toc-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 11pt;
+            line-height: 1.4;
+        }
+        .toc-title {
+            flex-shrink: 1;
+            max-width: calc(100% - 38px);
+        }
+        .toc-leader {
+            flex-grow: 1;
+            min-width: 18px;
+            border-bottom: 1px dotted #333;
+            margin: 0 6px;
+            position: relative;
+            top: -4px;
+        }
+        .toc-page {
+            flex-shrink: 0;
+            text-align: right;
+            min-width: 25px;
+        }
+        .toc-bold {
+            font-weight: bold;
+        }
+        .toc-indent-1 {
+            padding-left: 20px;
+        }
+        .toc-indent-2 {
+            padding-left: 40px;
+        }
+        .status-badge {
+            display: inline-block;
+            font-size: 9.5pt;
+            padding: 2px 8px;
+            border: 1px solid #000;
+            background: #f2f2f2;
+            font-weight: bold;
+        }
+        .live-note {
+            border: 1px dashed #444;
+            background: #f9fafb;
+            padding: 10px 14px;
+            margin: 14px 0;
+            font-size: 10.5pt;
+        }
+    </style>
+</head>
+<body>
+
+<div class="document-container">
+
+    <!-- ========================================== -->
+    <!-- HALAMAN JUDUL (COVER LAPORAN UAS ADAMIN)   -->
+    <!-- ========================================== -->
+    <div class="cover-page">
+        <h1 class="title" style="margin-top: 20px; margin-bottom: 35px; line-height: 1.4;">
+            LAPORAN PROYEK UJIAN AKHIR SEMESTER<br>
+            MATA KULIAH ANALISIS DATA MINING (ADAMIN)<br><br>
+            RANCANG BANGUN SISTEM REKOMENDASI RESTOCKING DAN BUNDLING PRODUK KERAMIK B2B BERBASIS MULTI-LEVEL STATE-OF-THE-ART ASSOCIATION RULE MINING DENGAN PIPELINE AUTO-REALTIME N8N DAN SUPABASE (KERAMINE)
+        </h1>
+
+        <p style="text-align: center; text-indent: 0; margin-top: 45px; font-size: 12pt; line-height: 1.6;">
+            Disusun untuk Memenuhi Tugas Ujian Akhir Semester (UAS)<br>
+            Mata Kuliah Analisis Data Mining Semester VII
+        </p>
+
+        <div style="margin: 60px 0 70px 0; font-size: 12pt; line-height: 1.6;">
+            <strong>Oleh:</strong><br><br>
+            <strong style="font-size: 13pt;">AHMAD FADLI PRATAMA</strong><br>
+            <strong>NIM. 12350111030</strong>
+        </div>
+
+        <div style="margin-top: 80px; font-size: 12pt; font-weight: bold; line-height: 1.5; text-transform: uppercase;">
+            PROGRAM STUDI TEKNIK INFORMATIKA<br>
+            FAKULTAS SAINS DAN TEKNOLOGI<br>
+            UNIVERSITAS ISLAM NEGERI SULTAN SYARIF KASIM RIAU<br>
+            PEKANBARU<br>
+            2026
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- KATA PENGANTAR                             -->
+    <!-- ========================================== -->
+    <div style="page-break-after: always; margin-top: 30px; margin-bottom: 40px;">
+        <h2 class="chapter-title" style="page-break-before: always;">KATA PENGANTAR</h2>
+
+        <p style="text-align: center; text-indent: 0; font-size: 16pt; margin-bottom: 15px; font-family: 'Traditional Arabic', 'Amiri', 'Times New Roman', serif;">
+            بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </p>
+
+        <p class="no-indent" style="text-align: center; font-style: italic; margin-bottom: 25px;">
+            Assalamu’alaikum Warahmatullahi Wabarakatuh
+        </p>
+
+        <p>
+            Alhamdulillah, segala puji dan syukur penulis panjatkan ke hadirat Allah Subhanahu Wa Ta’ala atas limpahan rahmat, taufik, dan hidayah-Nya sehingga penulis dapat menyusun dan mengembangkan laporan proyek Ujian Akhir Semester (UAS) mata kuliah Analisis Data Mining (ADAMIN) yang berjudul <em>“Rancang Bangun Sistem Rekomendasi Restocking dan Bundling Produk Keramik B2B Berbasis Multi-Level State-of-the-Art Association Rule Mining dengan Pipeline Auto-Realtime n8n dan Supabase (KeraMine)”</em>. Selawat serta salam senantiasa tercurahkan kepada junjungan alam Nabi Muhammad صلى الله عليه وسلم yang telah membawa umat manusia menuju peradaban ilmu pengetahuan dan teknologi.
+        </p>
+
+        <p>
+            Laporan ini disusun sebagai dokumentasi ilmiah hidup (<em>living academic report</em>) yang mengintegrasikan tahapan metodologi <em>Cross-Industry Standard Process for Data Mining</em> (CRISP-DM) pada studi kasus nyata distribusi bahan bangunan keramik <em>Business-to-Business</em> (B2B) sebanyak 16.000 baris transaksi. Berbeda dari studi kasus dasar pada literatur pengantar, proyek <strong>KeraMine</strong> ini mengeksplorasi tantangan riil agregasi keranjang periodik B2B, perbandingan algoritma <em>Apriori</em>, <em>FP-Growth</em>, dan <em>FP-Max</em>, penerapan metrik <em>State-of-the-Art</em> (<em>Zhang’s Metric</em>, <em>Conviction</em>, <em>Kulczynski</em>, serta pembobotan utilitas kuantitas kardus <code>QTY</code>), penyaringan signifikansi statistik melalui <em>Fisher’s Exact Test</em> dengan koreksi <em>Benjamini-Hochberg</em>, hingga otomatisasi pembaruan aturan secara <em>near-real-time</em> menggunakan <strong>n8n</strong>, <strong>FastAPI</strong>, <strong>Supabase PostgreSQL</strong>, dan <strong>Streamlit</strong>.
+        </p>
+
+        <p>
+            Penulis menyadari bahwa penyusunan laporan dan pengembangan perangkat lunak ini masih terus disempurnakan seiring berjalannya tahapan proyek. Oleh karena itu, kritik dan saran yang membangun sangat penulis harapkan demi kesempurnaan karya ini di masa mendatang.
+        </p>
+
+        <p class="no-indent" style="text-align: left; font-style: italic; margin-top: 20px;">
+            Wassalamu’alaikum Warahmatullahi Wabarakatuh
+        </p>
+
+        <div style="margin-top: 40px; text-align: right; line-height: 1.6;">
+            Pekanbaru, 10 November 2026<br>
+            Penulis,<br><br><br>
+            <strong>Ahmad Fadli Pratama</strong><br>
+            NIM. 12350111030
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- DAFTAR ISI                                 -->
+    <!-- ========================================== -->
+    <div class="toc-section">
+        <h2 class="chapter-title">DAFTAR ISI</h2>
+
+        <div class="toc-row"><span class="toc-title toc-bold">HALAMAN JUDUL</span><span class="toc-leader"></span><span class="toc-page">i</span></div>
+        <div class="toc-row"><span class="toc-title toc-bold">KATA PENGANTAR</span><span class="toc-leader"></span><span class="toc-page">ii</span></div>
+        <div class="toc-row"><span class="toc-title toc-bold">DAFTAR ISI</span><span class="toc-leader"></span><span class="toc-page">iii</span></div>
+        <div class="toc-row"><span class="toc-title toc-bold">DAFTAR TABEL</span><span class="toc-leader"></span><span class="toc-page">iv</span></div>
+        <div class="toc-row"><span class="toc-title toc-bold">DAFTAR GAMBAR</span><span class="toc-leader"></span><span class="toc-page">v</span></div>
+
+        <div class="toc-row" style="margin-top: 10px;"><span class="toc-title toc-bold">BAB 1 PENDAHULUAN</span><span class="toc-leader"></span><span class="toc-page">1</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">1.1 Latar Belakang Masalah</span><span class="toc-leader"></span><span class="toc-page">1</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">1.2 Rumusan Masalah</span><span class="toc-leader"></span><span class="toc-page">2</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">1.3 Batasan Masalah</span><span class="toc-leader"></span><span class="toc-page">3</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">1.4 Tujuan Penelitian</span><span class="toc-leader"></span><span class="toc-page">3</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">1.5 Manfaat Penelitian</span><span class="toc-leader"></span><span class="toc-page">4</span></div>
+
+        <div class="toc-row" style="margin-top: 10px;"><span class="toc-title toc-bold">BAB 2 LANDASAN TEORI</span><span class="toc-leader"></span><span class="toc-page">5</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">2.1 Konsep Penambangan Aturan Asosiasi (<em>Association Rule Mining</em>) pada Transaksi B2B</span><span class="toc-leader"></span><span class="toc-page">5</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">2.2 Algoritma Frequent Itemset Mining: Apriori, FP-Growth, dan FP-Max</span><span class="toc-leader"></span><span class="toc-page">6</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">2.3 Eksplorasi Metrik State-of-the-Art (Leverage, Conviction, Kulczynski, dan Zhang’s Metric)</span><span class="toc-leader"></span><span class="toc-page">7</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">2.4 Quantity/Utility-Weighted Association Rules dan Uji Signifikansi Fisher-BH</span><span class="toc-leader"></span><span class="toc-page">8</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">2.5 Orkestrasi Pipeline Data Mining Auto-Realtime dengan n8n, FastAPI, dan Supabase</span><span class="toc-leader"></span><span class="toc-page">9</span></div>
+
+        <div class="toc-row" style="margin-top: 10px;"><span class="toc-title toc-bold">BAB 3 METODOLOGI PENELITIAN</span><span class="toc-leader"></span><span class="toc-page">10</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">3.1 Kerangka Kerja Penelitian Berbasis CRISP-DM</span><span class="toc-leader"></span><span class="toc-page">10</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">3.2 Karakteristik Dataset Distribusi Keramik (<code>datasetarule.xlsx</code>)</span><span class="toc-leader"></span><span class="toc-page">11</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">3.3 Desain Agregasi Keranjang Periodik dan Hierarki Multi-Level Produk</span><span class="toc-leader"></span><span class="toc-page">12</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">3.4 Arsitektur Sistem Terintegrasi (Colab, Supabase, FastAPI, n8n, dan Streamlit)</span><span class="toc-leader"></span><span class="toc-page">13</span></div>
+
+        <div class="toc-row" style="margin-top: 10px;"><span class="toc-title toc-bold">BAB 4 HASIL DAN PEMBAHASAN</span><span class="toc-leader"></span><span class="toc-page">15</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">4.1 Hasil Audit Forensik Dataset dan Evaluasi Granularitas Keranjang Belanja</span><span class="toc-leader"></span><span class="toc-page">15</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">4.2 Hasil Pembersihan Data dan Ekstraksi Hierarki Produk (Colab Notebook 01)</span><span class="toc-leader"></span><span class="toc-page">17</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">4.3 Komparasi Algoritma (Apriori vs FP-Growth vs FP-Max) dan Evaluasi Metrik SOTA (Colab Notebook 02)</span><span class="toc-leader"></span><span class="toc-page">18</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">4.4 Implementasi Database Cloud Supabase, FastAPI Rule Engine, dan Pipeline Auto-Realtime n8n</span><span class="toc-leader"></span><span class="toc-page">19</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">4.5 Implementasi Portal B2B Laravel 13 dan Analysis Lab Streamlit (KeraMine)</span><span class="toc-leader"></span><span class="toc-page">20</span></div>
+
+        <div class="toc-row" style="margin-top: 10px;"><span class="toc-title toc-bold">BAB 5 KESIMPULAN DAN SARAN</span><span class="toc-leader"></span><span class="toc-page">21</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">5.1 Kesimpulan</span><span class="toc-leader"></span><span class="toc-page">21</span></div>
+        <div class="toc-row toc-indent-1"><span class="toc-title">5.2 Saran</span><span class="toc-leader"></span><span class="toc-page">22</span></div>
+
+        <div class="toc-row" style="margin-top: 10px;"><span class="toc-title toc-bold">DAFTAR PUSTAKA</span><span class="toc-leader"></span><span class="toc-page">23</span></div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- DAFTAR TABEL & DAFTAR GAMBAR               -->
+    <!-- ========================================== -->
+    <div class="toc-section">
+        <h2 class="chapter-title">DAFTAR TABEL</h2>
+        <div class="toc-row"><span class="toc-title">Tabel 3.1 Struktur Atribut Mentah pada Dataset <code>datasetarule.xlsx</code> (16.000 Baris)</span><span class="toc-leader"></span><span class="toc-page">11</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 3.2 Desain Hierarki Lima Tingkat Item Produk Keramik pada KeraMine</span><span class="toc-leader"></span><span class="toc-page">12</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 3.3 Skema Tabel Database Cloud PostgreSQL pada Supabase</span><span class="toc-leader"></span><span class="toc-page">14</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.1 Perbandingan Empiris Lima Kandidat Definisi Keranjang (<em>Basket Granularity</em>)</span><span class="toc-leader"></span><span class="toc-page">15</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.2 Distribusi Transaksi Berdasarkan Tenaga Penjual (<code>POF</code>) dan Ukuran Dimensi Keramik</span><span class="toc-leader"></span><span class="toc-page">16</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.3 Karakteristik Pola Kemunculan Bersama Awal Lintas Level Hierarki Item (<em>Toko + Bulan</em>)</span><span class="toc-leader"></span><span class="toc-page">17</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.4 Ringkasan Artefak Hasil Pembersihan Data dan Agregasi Profil (Colab Notebook 01)</span><span class="toc-leader"></span><span class="toc-page">17</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.5 Hasil Benchmark Algoritma Apriori, FP-Growth, dan FP-Max (<code>Toko + Bulan</code>)</span><span class="toc-leader"></span><span class="toc-page">18</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.6 Top-8 Aturan SOTA Teratas pada Level Utama <code>SERI</code> (<code>Toko + Bulan</code>)</span><span class="toc-leader"></span><span class="toc-page">19</span></div>
+        <div class="toc-row"><span class="toc-title">Tabel 4.7 Evaluasi Prediktif Temporal (<em>Out-of-Time Validation</em>)</span><span class="toc-leader"></span><span class="toc-page">19</span></div>
+
+        <h2 class="chapter-title" style="margin-top: 40px;">DAFTAR GAMBAR</h2>
+        <div class="toc-row"><span class="toc-title">Gambar 3.1 Tahapan Metodologi CRISP-DM pada Pengembangan Sistem KeraMine</span><span class="toc-leader"></span><span class="toc-page">10</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 3.2 Arsitektur Pipeline Auto-Realtime n8n, FastAPI, Supabase, dan Streamlit</span><span class="toc-leader"></span><span class="toc-page">13</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.1 Perbandingan Rasio Keranjang Multi-Item dan Total Volume Kardus (<code>DUS</code>) per Dimensi Ukuran</span><span class="toc-leader"></span><span class="toc-page">16</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.2 Perbandingan Waktu Komputasi dan Efisiensi Pemangkasan Itemset oleh FP-Max</span><span class="toc-leader"></span><span class="toc-page">18</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.3 Peta Kualitas Aturan SOTA Level <code>SERI</code> serta Dampak Penyaringan Statistik</span><span class="toc-leader"></span><span class="toc-page">19</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.4 Antarmuka Portal B2B Laravel 13 (Beranda Mode Terang dengan Koneksi Live Supabase &amp; FastAPI)</span><span class="toc-leader"></span><span class="toc-page">20</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.5 Modul Mesin Rekomendasi Bundling &amp; Restocking B2B Beserta Fallback Transparan</span><span class="toc-leader"></span><span class="toc-page">21</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.6 Antarmuka Orkestrasi Pipeline Real-Time FastAPI, Supabase &amp; n8n (Mode Gelap Opsi B)</span><span class="toc-leader"></span><span class="toc-page">21</span></div>
+        <div class="toc-row"><span class="toc-title">Gambar 4.7 Dashboard Interaktif Streamlit Analysis Lab KeraMine (Tab Audit Forensik &amp; EDA)</span><span class="toc-leader"></span><span class="toc-page">22</span></div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- BAB 1 PENDAHULUAN                          -->
+    <!-- ========================================== -->
+    <h2 class="chapter-title">BAB 1<br>PENDAHULUAN</h2>
+
+    <h3 class="section-title">1.1 Latar Belakang Masalah</h3>
+    <p>
+        Penambangan aturan asosiasi (<em>Association Rule Mining</em> atau ARM) merupakan salah satu pilar utama dalam disiplin ilmu <em>Data Mining</em> yang bertujuan mengidentifikasi keterkaitan atau pola kemunculan bersama antar-item di dalam basis data berskala besar (Agrawal et al., 1993; Han et al., 2000). Pada buku ajar klasik seperti <em>Data Mining for the Masses</em> Bab 5 karya Matthew North (2016), konsep aturan asosiasi diperkenalkan melalui studi kasus survei keterlibatan organisasi masyarakat berskala 3.483 observasi dengan 7 atribut biner menggunakan algoritma <em>FP-Growth</em> dan <em>Apriori</em>. Meskipun efektif sebagai fondasi pedagogis, penerapan langsung alur kerja buku teks tersebut pada data transaksi industri nyata—khususnya pada sektor distribusi <em>Business-to-Business</em> (B2B)—menghadapi sejumlah kendala struktural yang fundamental.
+    </p>
+    <p>
+        Pada penelitian proyek Ujian Akhir Semester (UAS) ini, objek kajian yang dianalisis adalah dataset transaksi penjualan distributor bahan bangunan keramik (<code>datasetarule.xlsx</code>) yang memuat <strong>16.000 baris transaksi</strong> selama periode 1 Agustus 2022 hingga 30 Desember 2023 (17 bulan), melibatkan <strong>237 toko pelanggan</strong>, <strong>438 produk keramik (SKU)</strong> dari 22 label merek, serta 4 tenaga penjual lapangan (<em>Point of Field</em> atau <code>POF</code>: Dian, Robby, Joni, dan Bari). Hasil audit forensik awal terhadap dataset tersebut mengungkap tiga permasalahan utama yang tidak ditemukan pada latihan buku teks:
+    </p>
+    <ol>
+        <li><strong>Anomali Granularitas Nomor Faktur (<em>Single-Item Invoice Trap</em>):</strong> Di dalam sistem pencatatan distributor ini, terdapat 15.985 nomor <code>NOTA</code> unik dari 16.000 baris transaksi (rata-rata 1,00 item per nota, dengan hanya 1 nota yang memiliki lebih dari satu produk). Apabila nomor <code>NOTA</code> digunakan secara naif sebagai penanda keranjang belanja (<em>market basket</em>), maka seluruh algoritma aturan asosiasi akan gagal dan menghasilkan nol aturan.</li>
+        <li><strong>Keterbatasan Representasi Biner dan Redundansi Aturan Klasik:</strong> Algoritma Apriori dan FP-Growth konvensional memperlakukan pembelian 5 kardus (<code>DUS</code>) sama dengan pembelian 150 kardus, mengabaikan adanya 146 baris transaksi bernilai nol (<code>QTY = 0</code>), serta hanya mengandalkan metrik <em>Support</em>, <em>Confidence</em>, dan <em>Lift</em> yang rentan menghasilkan aturan kebetulan (<em>spurious rules</em>) pada produk dengan frekuensi rendah.</li>
+        <li><strong>Ketiadaan Pipeline Pembaruan Otomatis (<em>Static Modeling</em>):</strong> Sebagian besar implementasi akademik berhenti pada berkas <em>notebook</em> statis, sehingga ketika transaksi pesanan toko baru masuk, tim <em>sales</em> maupun manajer gudang tidak memperoleh pembaruan rekomendasi secara otomatis.</li>
+    </ol>
+    <p>
+        Untuk menjawab ketiga tantangan tersebut, penulis merancang dan membangun <strong>KeraMine</strong> (<em>Keramik Association Mining &amp; Real-Time Recommendation Engine</em>). Sistem ini mendefinisikan ulang keranjang B2B berbasis agregasi periodik <strong>Toko + Bulan</strong> (yang terbukti menghasilkan 3.949 keranjang aktif dengan <strong>92,53% keranjang multi-item</strong>) pada hierarki produk bertingkat (Merek, Ukuran Dimensi, Seri Motif, dan SKU), mengimplementasikan eksplorasi <em>State-of-the-Art</em> (SOTA) meliputi perbandingan <em>Apriori</em>, <em>FP-Growth</em>, dan <em>FP-Max</em>, metrik <em>Zhang’s Metric</em>, <em>Conviction</em>, <em>Kulczynski</em>, pembobotan utilitas volume kardus (<code>QTY</code>), serta uji signifikansi statistik <em>Fisher’s Exact Test</em> dengan koreksi <em>Benjamini-Hochberg</em>. Lebih jauh lagi, KeraMine mengintegrasikan <em>workflow automation</em> <strong>n8n</strong>, layanan mikro <strong>FastAPI</strong>, basis data awan <strong>Supabase PostgreSQL</strong>, dan dasbor interaktif <strong>Streamlit</strong> untuk mewujudkan <em>pipeline</em> pembaruan aturan asosiasi secara <em>near-real-time</em>.
+    </p>
+
+    <h3 class="section-title">1.2 Rumusan Masalah</h3>
+    <ol>
+        <li>Bagaimana merumuskan definisi keranjang transaksi (<em>basket</em>) dan hierarki level produk yang tepat pada dataset distribusi keramik B2B (<code>datasetarule.xlsx</code>) agar mengatasi masalah <em>single-item invoice</em> pada kolom <code>NOTA</code>?</li>
+        <li>Bagaimana kinerja komputasi dan kualitas aturan yang dihasilkan oleh algoritma <em>Apriori</em>, <em>FP-Growth</em>, dan <em>FP-Max</em> ketika dipadukan dengan metrik SOTA (<em>Zhang’s Metric</em>, <em>Conviction</em>, <em>Kulczynski</em>, pembobotan kuantitas <code>QTY</code>) serta penyaringan signifikansi statistik <em>Fisher’s Exact Test</em>?</li>
+        <li>Bagaimana merancang dan mengimplementasikan <em>pipeline</em> otomatis berbasis <strong>n8n</strong>, <strong>FastAPI</strong>, dan <strong>Supabase PostgreSQL</strong> agar katalog aturan asosiasi pada dasbor rekomendasi <strong>Streamlit</strong> dapat diperbarui secara <em>near-real-time</em> saat transaksi baru masuk?</li>
+    </ol>
+
+    <h3 class="section-title">1.3 Batasan Masalah</h3>
+    <ol>
+        <li>Dataset utama yang digunakan adalah <code>datasetarule.xlsx</code> sebanyak 16.000 baris transaksi distribusi keramik periode 1 Agustus 2022 s.d. 30 Desember 2023 dalam satuan kardus (<code>DUS</code>).</li>
+        <li>Baris transaksi dengan kuantitas <code>QTY &le; 0</code> (160 baris) diklasifikasikan sebagai transaksi retur/pembatalan dan dipisahkan dari matriks keranjang pembelian positif.</li>
+        <li>Unit keranjang utama yang digunakan adalah agregasi bulanan per toko (<code>Toko + Bulan</code>) dan mingguan per toko (<code>Toko + Minggu</code>) pada lima tingkat representasi item: <code>MERK</code>, <code>UKURAN</code>, <code>MERK_UKURAN</code>, <code>SERI</code>, dan <code>NAMABARA</code>.</li>
+        <li>Lingkungan pemrosesan data dan validasi eksperimen menggunakan <strong>Google Colab</strong> (Python 3.13), sedangkan penyajian aplikasi menggunakan <strong>Streamlit</strong>, <strong>FastAPI</strong>, <strong>Supabase PostgreSQL</strong>, dan <strong>n8n</strong>.</li>
+    </ol>
+
+    <h3 class="section-title">1.4 Tujuan Penelitian</h3>
+    <ol>
+        <li>Melakukan audit forensik dan rekayasa fitur multi-level pada <code>datasetarule.xlsx</code> untuk menghasilkan struktur keranjang B2B yang valid secara statistik dan bisnis.</li>
+        <li>Mengevaluasi perbandingan algoritma <em>Apriori</em>, <em>FP-Growth</em>, dan <em>FP-Max</em> beserta metrik SOTA dan uji signifikansi <em>Fisher-BH</em> dalam menghasilkan rekomendasi paket <em>restocking</em> dan <em>bundling</em> produk keramik.</li>
+        <li>Membangun aplikasi rekomendasi interaktif <strong>KeraMine</strong> yang terhubung dengan <em>pipeline</em> otomatis <strong>n8n</strong> dan basis data awan <strong>Supabase</strong>.</li>
+    </ol>
+
+    <h3 class="section-title">1.5 Manfaat Penelitian</h3>
+    <ul>
+        <li><strong>Manfaat Akademis:</strong> Memberikan kontribusi metodologis berupa kerangka kerja audit kualitas data B2B dan integrasi uji signifikansi statistik (<em>Fisher’s Exact Test</em> + <em>Benjamini-Hochberg</em>) serta metrik <em>Zhang</em> pada penambangan aturan asosiasi.</li>
+        <li><strong>Manfaat Praktis Bisnis:</strong> Membantu tenaga penjual (<code>POF</code>) dan manajer gudang distributor keramik dalam menyusun paket penawaran <em>cross-selling</em> serta perencanaan stok berdasarkan pola pemesanan bulanan toko bangunan.</li>
+    </ul>
+
+    <!-- ========================================== -->
+    <!-- BAB 2 LANDASAN TEORI                       -->
+    <!-- ========================================== -->
+    <h2 class="chapter-title" style="page-break-before: always;">BAB 2<br>LANDASAN TEORI</h2>
+
+    <h3 class="section-title">2.1 Konsep Penambangan Aturan Asosiasi (<em>Association Rule Mining</em>) pada Transaksi B2B</h3>
+    <p>
+        Penambangan aturan asosiasi memodelkan hubungan implikasi berbentuk <em>A &rArr; C</em> (jika <em>antecedent/premis A</em> terjadi, maka <em>consequent/kesimpulan C</em> cenderung terjadi), di mana <em>A</em> dan <em>C</em> adalah himpunan item yang saling lepas (<em>A &cap; C = &empty;</em>). Berbeda dengan ritel konsumen (B2C) di mana satu struk kasir mencerminkan satu kunjungan belanja lengkap, transaksi pada rantai pasok B2B sering kali dicatat per baris pengiriman barang (<em>line-item delivery note</em>). Dalam literatur analitik rantai pasok B2B, unit analisis keranjang yang bermakna dibentuk melalui agregasi ruang-waktu (<em>spatio-temporal basket aggregation</em>), yakni menggabungkan seluruh pesanan yang dilakukan oleh entitas pelanggan (toko) yang sama dalam satu jendela periode pengadaan ulang (<em>restocking cycle</em>), seperti satu minggu atau satu bulan kalender.
+    </p>
+
+    <h3 class="section-title">2.2 Algoritma Frequent Itemset Mining: Apriori, FP-Growth, dan FP-Max</h3>
+    <p>
+        Tahap paling komputasional dalam pembentukan aturan asosiasi adalah pencarian himpunan item yang sering muncul bersama (<em>frequent itemsets</em>):
+    </p>
+    <ol>
+        <li><strong>Apriori (Agrawal &amp; Srikant, 1994):</strong> Menggunakan pendekatan <em>level-wise breadth-first search</em> berdasarkan sifat antimonoton (<em>Apriori property</em>), yakni setiap subset dari <em>frequent itemset</em> pasti juga <em>frequent</em>. Kelemahan utamanya adalah pembangkitan kandidat (<em>candidate generation</em>) yang membengkak secara eksponensial dan keharusan memindai basis data berulang kali.</li>
+        <li><strong>FP-Growth (Han et al., 2000):</strong> Memampatkan basis data transaksi ke dalam struktur pohon prefiks <em>Frequent Pattern Tree</em> (FP-Tree) hanya dengan dua kali pemindaian data, lalu mengekstrak pola secara <em>divide-and-conquer</em> melalui <em>conditional pattern bases</em> tanpa pembangkitan kandidat.</li>
+        <li><strong>FP-Max / Maximal Frequent Itemset Mining (Grahne &amp; Zhu, 2003):</strong> Mengekstrak hanya <em>frequent itemset</em> maksimal (yaitu <em>frequent itemset</em> yang tidak memiliki <em>superset</em> yang juga <em>frequent</em>), sehingga mampu memangkas ribuan kombinasi subset yang redundan pada data berdimensi tinggi.</li>
+    </ol>
+
+    <h3 class="section-title">2.3 Eksplorasi Metrik State-of-the-Art (Leverage, Conviction, Kulczynski, dan Zhang’s Metric)</h3>
+    <p>
+        Evaluasi aturan asosiasi yang hanya mengandalkan <em>Support</em>, <em>Confidence</em>, dan <em>Lift</em> memiliki kelemahan ketika distribusi frekuensi antar-item timpang atau ketika ukuran sampel kecil. Oleh karena itu, literatur <em>data mining</em> modern menggunakan metrik komplementer berikut:
+    </p>
+
+    <div class="formula-box">
+        Support(<em>A &rArr; C</em>) = <em>P</em>(<em>A &cap; C</em>) = <em>n<sub>AC</sub></em> / <em>N</em>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        Confidence(<em>A &rArr; C</em>) = <em>P</em>(<em>C</em> | <em>A</em>) = <em>n<sub>AC</sub></em> / <em>n<sub>A</sub></em>
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        Lift(<em>A &rArr; C</em>) = <em>P</em>(<em>A &cap; C</em>) / [<em>P</em>(<em>A</em>) &middot; <em>P</em>(<em>C</em>)]
+    </div>
+
+    <div class="formula-box">
+        Leverage(<em>A &rArr; C</em>) = <em>P</em>(<em>A &cap; C</em>) &minus; <em>P</em>(<em>A</em>)<em>P</em>(<em>C</em>)
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        Conviction(<em>A &rArr; C</em>) = [1 &minus; <em>P</em>(<em>C</em>)] / [1 &minus; Confidence(<em>A &rArr; C</em>)]
+    </div>
+
+    <div class="formula-box">
+        Kulczynski(<em>A, C</em>) = &frac12; [ <em>P</em>(<em>A</em> | <em>C</em>) + <em>P</em>(<em>C</em> | <em>A</em>) ]
+        &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+        Zhang(<em>A &rArr; C</em>) = [ <em>P</em>(<em>A &cap; C</em>) &minus; <em>P</em>(<em>A</em>)<em>P</em>(<em>C</em>) ] / max{ <em>P</em>(<em>A &cap; C</em>)(1 &minus; <em>P</em>(<em>A</em>)), <em>P</em>(<em>A</em>)(<em>P</em>(<em>C</em>) &minus; <em>P</em>(<em>A &cap; C</em>)) }
+    </div>
+
+    <p>
+        <strong>Zhang’s Metric</strong> (Zhang, 2000) memiliki keunggulan khusus karena nilainya terbatas secara simetris pada rentang [&minus;1, +1]: nilai +1 menunjukkan asosiasi positif maksimum, 0 menunjukkan independensi statistik, dan &minus;1 menunjukkan asosiasi negatif (saling menggantikan/eksklusif). Sementara itu, <strong>Kulczynski</strong> bersifat <em>null-invariant</em>, yaitu nilainya tidak terpengaruh oleh jumlah total transaksi kosong yang tidak membeli kedua produk.
+    </p>
+
+    <h3 class="section-title">2.4 Quantity/Utility-Weighted Association Rules dan Uji Signifikansi Fisher-BH</h3>
+    <p>
+        Dalam tren riset <em>High-Utility Itemset Mining</em> (HUIM) terkini (Fournier-Viger et al., 2024; Gan et al., 2021), setiap item dalam transaksi memiliki bobot utilitas kuantitatif (seperti jumlah unit <code>QTY</code> atau nilai keuntungan). Pada KeraMine, diintegrasikan metrik <em>Utility-Weighted Score</em> yang menggabungkan kekuatan asosiasi probabilistik dengan logaritma rata-rata volume kardus (<code>DUS</code>) yang terjual. Selain itu, untuk menghindari jebakan aturan palsu (<em>false discoveries</em>) akibat pengujian ribuan pasangan item sekaligus (Hämäläinen &amp; Webb, 2019), setiap aturan diuji menggunakan <strong>Fisher’s Exact Test</strong> satu-sisi pada tabel kontingensi 2&times;2 dan dikoreksi dengan prosedur <em>False Discovery Rate</em> (FDR) <strong>Benjamini-Hochberg</strong>.
+    </p>
+
+    <h3 class="section-title">2.5 Orkestrasi Pipeline Data Mining Auto-Realtime dengan n8n, FastAPI, dan Supabase</h3>
+    <p>
+        Agar model aturan asosiasi dapat beroperasi secara berkesinambungan (<em>incremental / continuous mining pipeline</em>), diperlukan arsitektur berbasis peristiwa (<em>event-driven architecture</em>). <strong>n8n</strong> adalah platform orkestrasi alur kerja berbasis <em>node</em> yang dapat menangkap pemicu <em>webhook</em> maupun jadwal waktu (<em>cron</em>), melakukan transformasi data, memanggil layanan mikro komputasi <strong>FastAPI</strong> (Python), dan memperbarui tabel aturan di dalam basis data relasional awan <strong>Supabase PostgreSQL</strong> untuk disajikan langsung pada antarmuka <strong>Streamlit</strong>.
+    </p>
+
+    <!-- ========================================== -->
+    <!-- BAB 3 METODOLOGI PENELITIAN                -->
+    <!-- ========================================== -->
+    <h2 class="chapter-title" style="page-break-before: always;">BAB 3<br>METODOLOGI PENELITIAN</h2>
+
+    <h3 class="section-title">3.1 Kerangka Kerja Penelitian Berbasis CRISP-DM</h3>
+    <p>
+        Penelitian ini mengadopsi metodologi standar industri <em>Cross-Industry Standard Process for Data Mining</em> (CRISP-DM) yang terdiri atas enam tahapan siklikal: (1) <em>Business Understanding</em>, (2) <em>Data Understanding &amp; Forensic Profiling</em>, (3) <em>Data Preparation &amp; Multi-Level Basket Engineering</em>, (4) <em>SOTA Association Rule Modeling</em>, (5) <em>Statistical &amp; Temporal Evaluation</em>, serta (6) <em>Deployment via n8n, FastAPI, Supabase, dan Streamlit</em>.
+    </p>
+
+    <h3 class="section-title">3.2 Karakteristik Dataset Distribusi Keramik (<code>datasetarule.xlsx</code>)</h3>
+    <p>
+        Dataset yang dianalisis berasal dari berkas <code>datasetarule.xlsx</code> yang berisi 16.000 baris transaksi distribusi keramik dari tanggal 1 Agustus 2022 hingga 30 Desember 2023. Rincian kesepuluh atribut mentah ditunjukkan pada Tabel 3.1.
+    </p>
+
+    <div class="caption">Tabel 3.1 Struktur Atribut Mentah pada Dataset <code>datasetarule.xlsx</code> (16.000 Baris)</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 5%;">No</th>
+                <th style="width: 16%;">Nama Kolom</th>
+                <th style="width: 14%;">Tipe Data</th>
+                <th style="width: 15%;">Kardinalitas Unik</th>
+                <th>Contoh Nilai &amp; Deskripsi Bisnis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;">1</td>
+                <td><code>NAMA</code></td>
+                <td style="text-align: center;">Kategorikal (Teks)</td>
+                <td style="text-align: center;">237 toko</td>
+                <td><code>KUNCI SUKSES, TOKO</code>; nama toko bangunan mitra B2B.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">2</td>
+                <td><code>NAMABARA</code></td>
+                <td style="text-align: center;">Kategorikal (Teks)</td>
+                <td style="text-align: center;">438 produk</td>
+                <td><code>ESMERALDA STONE BROWNISH 40X40</code>; nama SKU lengkap.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">3</td>
+                <td><code>TGL</code></td>
+                <td style="text-align: center;">Numerik (Serial)</td>
+                <td style="text-align: center;">516 tanggal</td>
+                <td><code>44774</code> s.d. <code>45290</code> (1 Agustus 2022 – 30 Desember 2023).</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">4</td>
+                <td><code>NOTA</code></td>
+                <td style="text-align: center;">Teks (ID Baris)</td>
+                <td style="text-align: center;">15.985 nota</td>
+                <td><code>JL*6690.9238</code>; nomor faktur pengiriman per baris barang.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">5</td>
+                <td><code>QTY</code></td>
+                <td style="text-align: center;">Numerik (Integer)</td>
+                <td style="text-align: center;">Kontinu</td>
+                <td>Kuantitas kardus keramik (15.840 baris &gt; 0; 146 baris <code>QTY = 0</code>; 14 baris kosong <em>trailing</em> pada XML).</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">6</td>
+                <td><code>SATUAN</code></td>
+                <td style="text-align: center;">Kategorikal (Teks)</td>
+                <td style="text-align: center;">1 satuan</td>
+                <td><code>DUS</code> (kardus keramik).</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">7</td>
+                <td><code>KODE</code></td>
+                <td style="text-align: center;">Numerik (ID)</td>
+                <td style="text-align: center;">237 kode</td>
+                <td><code>801</code>, <code>923</code>; kode identifikasi numerik toko pelanggan.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">8</td>
+                <td><code>KODEBARA</code></td>
+                <td style="text-align: center;">Numerik (ID)</td>
+                <td style="text-align: center;">438 kode</td>
+                <td><code>4115</code>, <code>5530</code>; kode identifikasi numerik barang/SKU.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">9</td>
+                <td><code>POF</code></td>
+                <td style="text-align: center;">Kategorikal (Teks)</td>
+                <td style="text-align: center;">4 sales</td>
+                <td><code>DIAN</code>, <code>ROBBY</code>, <code>JONI</code>, <code>BARI</code>; tenaga penjual penanggung jawab.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;">10</td>
+                <td><code>MERK</code></td>
+                <td style="text-align: center;">Kategorikal (Teks)</td>
+                <td style="text-align: center;">22 label</td>
+                <td><code>PICASSO</code>, <code>FORTUNER</code>, <code>VALENSIA</code>, <code>MCC</code>, dll.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="section-title">3.3 Desain Agregasi Keranjang Periodik dan Hierarki Multi-Level Produk</h3>
+    <p>
+        Untuk memungkinkan ekstraksi aturan asosiasi dari tingkat strategis hingga tingkat operasional, setiap baris produk (<code>NAMABARA</code>) dan merek (<code>MERK</code>) dipetakan ke dalam lima tingkat granularitas item sebagaimana disajikan pada Tabel 3.2.
+    </p>
+
+    <div class="caption">Tabel 3.2 Desain Hierarki Lima Tingkat Item Produk Keramik pada KeraMine</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 12%;">Kode Level</th>
+                <th style="width: 22%;">Nama Level Item</th>
+                <th style="width: 16%;">Jumlah Item Unik</th>
+                <th>Metode Ekstraksi &amp; Kegunaan Rekomendasi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><strong>L1-A</strong></td>
+                <td><code>MERK</code> (Merek Bersih)</td>
+                <td style="text-align: center;">21–22 merek</td>
+                <td>Normalisasi kolom <code>MERK</code> (termasuk penyatuan ejaan <code>PISSCASO</code> &rarr; <code>PICASSO</code>). Digunakan untuk analisis portofolio merek antar-sales.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>L1-B</strong></td>
+                <td><code>UKURAN</code> (Dimensi)</td>
+                <td style="text-align: center;">8 ukuran</td>
+                <td>Regex <code>(\d{2,3})\s*X\s*(\d{2,3})</code> pada <code>NAMABARA</code> (<code>40X40</code>, <code>25X40</code>, <code>50X50</code>, <code>25X25</code>, dll.). Digunakan untuk perencanaan kapasitas gudang.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>L2-A</strong></td>
+                <td><code>MERK_UKURAN</code></td>
+                <td style="text-align: center;">~150 item</td>
+                <td>Konkatenasi <code>merk_clean + "_" + ukuran</code>. Digunakan untuk paket <em>bundling</em> merek pada ukuran lantai dan dinding.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>L2-B</strong></td>
+                <td><strong><code>SERI</code> (Seri Motif)</strong></td>
+                <td style="text-align: center;"><strong>220 seri</strong></td>
+                <td><strong>Level Utama Rekomendasi:</strong> Token nama seri motif dari <code>NAMABARA</code> (contoh: <code>DAKOTA</code>, <code>NEO</code>, <code>ESMERALDA</code>). Seimbang antara <em>support</em> dan spesifisitas.</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><strong>L3</strong></td>
+                <td><code>NAMABARA</code> (Full SKU)</td>
+                <td style="text-align: center;">438 SKU</td>
+                <td>Nama produk lengkap beserta warna dan ukuran. Digunakan untuk pencarian pasangan produk mikro (<em>niche</em>).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="section-title">3.4 Arsitektur Sistem Terintegrasi (Colab, Supabase, FastAPI, n8n, dan Streamlit)</h3>
+    <p>
+        Sistem KeraMine dibangun dengan arsitektur berlapis yang menghubungkan eksperimen ilmiah di <strong>Google Colab</strong> dengan basis data awan <strong>Supabase PostgreSQL</strong>, mesin komputasi mikro <strong>FastAPI</strong>, orkestrator alur kerja <strong>n8n</strong>, dan antarmuka <strong>Streamlit</strong>. Skema keempat tabel inti pada Supabase PostgreSQL dirangkum pada Tabel 3.3.
+    </p>
+
+    <div class="caption">Tabel 3.3 Skema Tabel Database Cloud PostgreSQL pada Supabase</div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 26%;">Nama Tabel</th>
+                <th style="width: 22%;">Primary Key</th>
+                <th>Atribut Utama &amp; Fungsi Penyimpanan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>keramine_transactions</code></td>
+                <td><code>id</code> (BIGSERIAL)</td>
+                <td>Menyimpan 16.000 baris transaksi (beserta hasil ekstraksi <code>year_month</code>, <code>year_week</code>, <code>merk_clean</code>, <code>ukuran</code>, <code>seri</code>, <code>is_return</code>) dan transaksi baru dari n8n.</td>
+            </tr>
+            <tr>
+                <td><code>keramine_mining_runs</code></td>
+                <td><code>id</code> (UUID)</td>
+                <td>Mencatat riwayat eksekusi algoritma (pemicu <code>n8n_webhook</code>/<code>colab_seed</code>, algoritma, <code>min_support</code>, jumlah aturan signifikan, dan waktu eksekusi dalam milidetik).</td>
+            </tr>
+            <tr>
+                <td><code>keramine_rules</code></td>
+                <td><code>id</code> (SHA-256 Hash)</td>
+                <td>Menyimpan katalog aturan asosiasi lengkap: <code>antecedents</code>, <code>consequents</code>, <code>support</code>, <code>confidence</code>, <code>lift</code>, <code>leverage</code>, <code>conviction</code>, <code>kulczynski</code>, <code>zhang_metric</code>, <code>avg_qty_dus</code>, <code>utility_score</code>, <code>p_value_fisher</code>, <code>q_value_bh</code>, dan <code>is_significant</code>.</td>
+            </tr>
+            <tr>
+                <td><code>keramine_store_profiles</code></td>
+                <td><code>nama_toko</code> (TEXT)</td>
+                <td>Menyimpan profil agregat 237 toko pelanggan (total keranjang bulanan, total volume kardus, <code>dominant_pof</code>, serta daftar merek dan seri favorit).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- ========================================== -->
+    <!-- BAB 4 HASIL DAN PEMBAHASAN                 -->
+    <!-- ========================================== -->
+    <h2 class="chapter-title" style="page-break-before: always;">BAB 4<br>HASIL DAN PEMBAHASAN</h2>
+
+    <h3 class="section-title">4.1 Hasil Audit Forensik Dataset dan Evaluasi Granularitas Keranjang Belanja</h3>
+    <p>
+        Tahap pertama implementasi adalah melakukan pemindaian forensik terhadap seluruh 16.000 baris transaksi pada <code>datasetarule.xlsx</code>. Pengujian empiris dilakukan terhadap lima kandidat definisi keranjang belanja (<em>basket</em>) untuk mengukur proporsi keranjang yang memiliki minimal dua item berbeda (<em>multi-item basket ratio</em>), sebagaimana ditampilkan pada Tabel 4.1.
+    </p>
+
+    <div class="caption">Tabel 4.1 Perbandingan Empiris Lima Kandidat Definisi Keranjang (<em>Basket Granularity</em>)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Definisi Unit Keranjang (<em>Basket Key</em>)</th>
+                <th style="width: 14%;">Total Basket</th>
+                <th style="width: 16%;">Basket &ge; 2 Item</th>
+                <th style="width: 14%;">Rasio Multi-Item</th>
+                <th style="width: 13%;">Rata-rata Item</th>
+                <th style="width: 11%;">Maks Item</th>
+                <th>Status Kelayakan Mining</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>NOTA</code> (Nomor Faktur Baris)</td>
+                <td style="text-align: center;">15.839</td>
+                <td style="text-align: center;">1</td>
+                <td style="text-align: center;">0,01%</td>
+                <td style="text-align: center;">1,00</td>
+                <td style="text-align: center;">2</td>
+                <td><strong>Tidak Layak</strong> (0 aturan; hanya 1 tabrakan acak)</td>
+            </tr>
+            <tr>
+                <td><code>Toko + Hari</code> (<code>NAMA + TGL</code>)</td>
+                <td style="text-align: center;">14.874</td>
+                <td style="text-align: center;">927</td>
+                <td style="text-align: center;">6,23%</td>
+                <td style="text-align: center;">1,06</td>
+                <td style="text-align: center;">4</td>
+                <td>Terlalu Jarang (<em>Sparse</em>)</td>
+            </tr>
+            <tr>
+                <td><code>Toko + Minggu</code> (<code>NAMA + Minggu</code>)</td>
+                <td style="text-align: center;">10.475</td>
+                <td style="text-align: center;">4.032</td>
+                <td style="text-align: center;">38,49%</td>
+                <td style="text-align: center;">1,51</td>
+                <td style="text-align: center;">6</td>
+                <td><strong>Layak (Keranjang Taktis)</strong></td>
+            </tr>
+            <tr>
+                <td><strong><code>Toko + Bulan</code> (<code>NAMA + YYYY-MM</code>)</strong></td>
+                <td style="text-align: center;"><strong>3.949</strong></td>
+                <td style="text-align: center;"><strong>3.654</strong></td>
+                <td style="text-align: center;"><strong>92,53%</strong></td>
+                <td style="text-align: center;"><strong>3,99</strong></td>
+                <td style="text-align: center;"><strong>12</strong></td>
+                <td><strong>Sangat Ideal (Unit Utama)</strong></td>
+            </tr>
+            <tr>
+                <td><code>Toko Total</code> (17 Bulan Digabung)</td>
+                <td style="text-align: center;">237</td>
+                <td style="text-align: center;">237</td>
+                <td style="text-align: center;">100,00%</td>
+                <td style="text-align: center;">62,03</td>
+                <td style="text-align: center;">83</td>
+                <td>Terlalu Lebar (Kehilangan konteks waktu)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>
+        Sebagaimana dibuktikan pada Tabel 4.1, penggunaan <code>NOTA</code> pada 15.840 transaksi pembelian positif hanya menghasilkan 1 keranjang multi-item (yaitu tabrakan acak nomor <code>JL*7211.3746</code> pada dua toko dan tanggal berbeda), sedangkan agregasi berdasarkan <strong><code>Toko + Bulan</code></strong> menghasilkan <strong>3.949 keranjang</strong> dengan proporsi multi-item <strong>92,53%</strong> (rata-rata 3,99 SKU unik per keranjang, maksimum 12 SKU). Visualisasi perbandingan granularitas keranjang dan volume distribusi per ukuran keramik ditampilkan pada Gambar 4.1.
+    </p>
+
+    <div class="figure-block">
+        <img src="assets/figures/basket_granularity_audit.png" alt="Audit Granularitas Keranjang dan Volume DUS per Ukuran">
+        <div class="caption-figure">Gambar 4.1 Perbandingan Rasio Keranjang Multi-Item dan Total Volume Kardus (<code>DUS</code>) per Dimensi Ukuran (Colab Notebook 01)</div>
+    </div>
+
+    <div class="caption">Tabel 4.2 Distribusi Transaksi Berdasarkan Tenaga Penjual (<code>POF</code>) dan Ukuran Dimensi Keramik</div>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="3">Distribusi Tenaga Penjual (<code>POF</code>)</th>
+                <th colspan="3">Distribusi Dimensi Ukuran Produk Keramik (438 SKU)</th>
+            </tr>
+            <tr>
+                <th>Nama Sales (<code>POF</code>)</th>
+                <th>Jumlah Transaksi</th>
+                <th>Proporsi (%)</th>
+                <th>Dimensi Ukuran</th>
+                <th>Jumlah SKU Unik</th>
+                <th>Support pada <code>Toko+Bulan</code></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align: center;"><code>DIAN</code></td>
+                <td style="text-align: center;">4.064</td>
+                <td style="text-align: center;">25,40%</td>
+                <td style="text-align: center;"><code>40X40</code> (Lantai Standar)</td>
+                <td style="text-align: center;">139 SKU</td>
+                <td style="text-align: center;">73,36%</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><code>ROBBY</code></td>
+                <td style="text-align: center;">4.005</td>
+                <td style="text-align: center;">25,03%</td>
+                <td style="text-align: center;"><code>25X40</code> (Dinding)</td>
+                <td style="text-align: center;">112 SKU</td>
+                <td style="text-align: center;">~63,10%</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><code>JONI</code></td>
+                <td style="text-align: center;">3.970</td>
+                <td style="text-align: center;">24,81%</td>
+                <td style="text-align: center;"><code>50X50</code> (Lantai Besar)</td>
+                <td style="text-align: center;">101 SKU</td>
+                <td style="text-align: center;">~59,80%</td>
+            </tr>
+            <tr>
+                <td style="text-align: center;"><code>BARI</code></td>
+                <td style="text-align: center;">3.947</td>
+                <td style="text-align: center;">24,67%</td>
+                <td style="text-align: center;"><code>25X25</code>, <code>25X50</code>, <code>60X60</code>, <code>20X40</code></td>
+                <td style="text-align: center;">84 SKU (+2 non-ukuran)</td>
+                <td style="text-align: center;">Bervariasi</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="caption">Tabel 4.3 Karakteristik Pola Kemunculan Bersama Awal Lintas Level Hierarki Item (3.949 Keranjang Positif <code>Toko + Bulan</code>)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Level Hierarki</th>
+                <th>Item Unik</th>
+                <th>Pasangan Aktif (<em>n<sub>AB</sub></em> &ge; 5)</th>
+                <th>Rentang <em>Lift</em> (Min / Avg / Max)</th>
+                <th>Contoh Pasangan Teratas &amp; Karakteristik Pola</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>L1-A: <code>MERK</code></strong></td>
+                <td style="text-align: center;">22</td>
+                <td style="text-align: center;">231</td>
+                <td style="text-align: center;">0,78 / 0,98 / 1,20</td>
+                <td><code>FORTUNER + G M</code> (<em>n</em> = 135, <em>Support</em> = 3,42%, <em>Lift</em> = 1,20); <code>EXCELSIOR + VALENSIA</code> (<em>n</em> = 133, <em>Support</em> = 3,37%, <em>Lift</em> = 1,18).</td>
+            </tr>
+            <tr>
+                <td><strong>L1-B: <code>UKURAN</code></strong></td>
+                <td style="text-align: center;">8</td>
+                <td style="text-align: center;">27</td>
+                <td style="text-align: center;">0,75 / 0,99 / 1,32</td>
+                <td><code>25X40 + 40X40</code> (<em>n</em> = 1.775, <em>Support</em> = 44,95%); <code>40X40 + 50X50</code> (<em>n</em> = 1.706, <em>Support</em> = 43,20%).</td>
+            </tr>
+            <tr>
+                <td><strong>L2-B: <code>SERI</code></strong></td>
+                <td style="text-align: center;">220</td>
+                <td style="text-align: center;">949</td>
+                <td style="text-align: center;"><strong>0,47 / 1,82 / 8,44</strong></td>
+                <td><code>DAKOTA + NEO</code> (<em>n</em> = 24, <em>Lift</em> = 1,20); <code>DOT + NEO</code> (<em>n</em> = 21, <em>Lift</em> = 1,44); <code>DAKOTA + GALANOS</code> (<em>n</em> = 17, <em>Lift</em> = 1,51).</td>
+            </tr>
+            <tr>
+                <td><strong>L3: <code>NAMABARA</code></strong></td>
+                <td style="text-align: center;">438</td>
+                <td style="text-align: center;">2</td>
+                <td style="text-align: center;">10,07 / 10,52 / 10,97</td>
+                <td><code>FABOLOUS YELLOWISH 25X40 + PIANTA ABU 40X40</code> (<em>n</em> = 5, <em>Support</em> = 0,13%, <em>Lift</em> = 10,97).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="section-title">4.2 Hasil Pembersihan Data dan Ekstraksi Hierarki Produk (Colab Notebook 01)</h3>
+    <p>
+        Eksekusi <code>notebooks/01_data_cleaning_basket_engineering.ipynb</code> di Google Colab terhadap berkas <code>datasetarule.xlsx</code> berhasil memverifikasi seluruh asersi kualitas data dengan keluaran artefak bersih <code>adamin_colab_01_outputs.zip</code> (1.067 KB). Dari total 15.986 baris aktif (0 <em>missing values</em> dan 0 duplikat baris identik), sebanyak <strong>146 baris bernilai <code>QTY = 0</code></strong> dipisahkan ke <code>returns_log.csv</code> dan <strong>15.840 baris transaksi positif</strong> (total volume <strong>794.064 DUS</strong>, rata-rata 50,13 DUS per baris, median 50,0 DUS) disimpan ke <code>transactions_clean.csv</code>.
+    </p>
+    <p>
+        Pada tahap normalisasi entitas, sebanyak <strong>725 baris berlabel ejaan <code>PISSCASO</code></strong> disatukan ke merek <code>PICASSO</code> sehingga menghasilkan tepat <strong>21 merek bersih</strong>. Ekstraksi dimensi menggunakan pola ekspresi reguler menghasilkan 8 kategori ukuran (<code>40X40</code> sebanyak 255.854 DUS, <code>25X40</code> sebanyak 199.804 DUS, <code>50X50</code> sebanyak 182.727 DUS, <code>25X25</code> sebanyak 110.992 DUS, <code>25X50</code> sebanyak 15.851 DUS, <code>20X40</code> sebanyak 12.333 DUS, <code>60X60</code> sebanyak 12.190 DUS, dan <code>NON_STD</code> sebanyak 4.313 DUS untuk 2 SKU granit tanpa dimensi <code>NN&times;NN</code>: <code>GRANIT CREAM POLOS NA 703</code> dan <code>GRANIT HITAM NA 6299</code>), <strong>168 kombinasi <code>MERK_UKURAN</code></strong>, <strong>220 seri motif</strong>, serta profil agregat untuk <strong>237 toko pelanggan</strong> pada <code>store_profiles.json</code>.
+    </p>
+
+    <div class="caption">Tabel 4.4 Ringkasan Artefak Hasil Pembersihan Data dan Agregasi Profil (Colab Notebook 01)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter / Artefak Keluaran</th>
+                <th>Hasil Terverifikasi Colab</th>
+                <th>Keterangan Teknis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>transactions_clean.csv</code></td>
+                <td style="text-align: center;">15.840 baris &times; 20 kolom</td>
+                <td>Periode <code>2022-08-01</code> s.d. <code>2023-12-30</code> (17 bulan), total <strong>794.064 DUS</strong>, dilengkapi hash SHA-256 unik.</td>
+            </tr>
+            <tr>
+                <td><code>returns_log.csv</code></td>
+                <td style="text-align: center;">146 baris</td>
+                <td>Baris <code>QTY = 0</code> (0 baris <code>QTY &lt; 0</code>) dipisahkan dari matriks asosiasi positif.</td>
+            </tr>
+            <tr>
+                <td>Normalisasi Merek &amp; Hierarki</td>
+                <td style="text-align: center;">21 Merek &bull; 8 Ukuran &bull; 168 Merek-Ukuran &bull; 220 Seri &bull; 438 SKU</td>
+                <td>Penyatuan 725 baris typo <code>PISSCASO &rarr; PICASSO</code>; identifikasi tabrakan nomor nota <code>JL*7211.3746</code>.</td>
+            </tr>
+            <tr>
+                <td><code>store_profiles.json</code></td>
+                <td style="text-align: center;">237 toko pelanggan</td>
+                <td>Distribusi merata ke 4 sales: <code>DIAN</code> (4.030 tx / 200.628 DUS), <code>ROBBY</code> (3.970 / 200.489), <code>JONI</code> (3.921 / 195.201), <code>BARI</code> (3.919 / 197.746).</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3 class="section-title">4.3 Komparasi Algoritma (Apriori vs FP-Growth vs FP-Max) dan Evaluasi Metrik SOTA (Colab Notebook 02)</h3>
+    <p>
+        Eksperimen pemodelan pada <code>notebooks/02_sota_association_rules_validation.ipynb</code> berhasil mengekstrak total <strong>784 aturan asosiasi</strong> lintas lima level produk dan dua jendela keranjang (<code>Toko + Bulan</code> dan <code>Toko + Minggu</code>), serta memverifikasi 100% kesamaan himpunan <em>frequent itemsets</em> antara algoritma <em>Apriori</em> dan <em>FP-Growth</em>. Hasil perbandingan waktu komputasi dan efisiensi pemangkasan redundansi oleh <em>FP-Max</em> disajikan pada Tabel 4.5 dan Gambar 4.2.
+    </p>
+
+    <div class="caption">Tabel 4.5 Hasil Benchmark Algoritma Apriori, FP-Growth, dan FP-Max (<code>Toko + Bulan</code>, 3.949 Keranjang)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Level Item</th>
+                <th>Item Unik</th>
+                <th>Min Support</th>
+                <th>Apriori (ms)</th>
+                <th>FP-Growth (ms)</th>
+                <th>FP-Max (ms)</th>
+                <th>Total Frequent Itemsets</th>
+                <th>Maximal Itemsets (FP-Max)</th>
+                <th>Reduksi Redundansi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>MERK</code></td>
+                <td style="text-align: center;">21</td>
+                <td style="text-align: center;">0,0200</td>
+                <td style="text-align: center;"><strong>45,47</strong></td>
+                <td style="text-align: center;">5.108,98</td>
+                <td style="text-align: center;">2.685,72</td>
+                <td style="text-align: center;">231</td>
+                <td style="text-align: center;">210</td>
+                <td style="text-align: center;">9,09%</td>
+            </tr>
+            <tr>
+                <td><code>UKURAN</code></td>
+                <td style="text-align: center;">8</td>
+                <td style="text-align: center;">0,0200</td>
+                <td style="text-align: center;"><strong>4,12</strong></td>
+                <td style="text-align: center;">417,47</td>
+                <td style="text-align: center;">125,77</td>
+                <td style="text-align: center;">41</td>
+                <td style="text-align: center;">9</td>
+                <td style="text-align: center;"><strong>78,05%</strong></td>
+            </tr>
+            <tr>
+                <td><code>MERK_UKURAN</code></td>
+                <td style="text-align: center;">168</td>
+                <td style="text-align: center;">0,0020</td>
+                <td style="text-align: center;"><strong>93,27</strong></td>
+                <td style="text-align: center;">20.725,28</td>
+                <td style="text-align: center;">18.999,11</td>
+                <td style="text-align: center;">1.603</td>
+                <td style="text-align: center;">1.519</td>
+                <td style="text-align: center;">5,24%</td>
+            </tr>
+            <tr>
+                <td><code>SERI</code></td>
+                <td style="text-align: center;">220</td>
+                <td style="text-align: center;">0,0015</td>
+                <td style="text-align: center;"><strong>41,40</strong></td>
+                <td style="text-align: center;">8.997,88</td>
+                <td style="text-align: center;">6.741,14</td>
+                <td style="text-align: center;">746</td>
+                <td style="text-align: center;">602</td>
+                <td style="text-align: center;"><strong>19,30%</strong></td>
+            </tr>
+            <tr>
+                <td><code>NAMABARA</code></td>
+                <td style="text-align: center;">438</td>
+                <td style="text-align: center;">0,0010</td>
+                <td style="text-align: center;"><strong>56,11</strong></td>
+                <td style="text-align: center;">1.055,25</td>
+                <td style="text-align: center;">1.122,43</td>
+                <td style="text-align: center;">474</td>
+                <td style="text-align: center;">409</td>
+                <td style="text-align: center;">13,71%</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="figure-block">
+        <img src="assets/figures/sota_algorithm_benchmark.png" alt="Benchmark Algoritma Apriori vs FP-Growth vs FP-Max">
+        <div class="caption-figure">Gambar 4.2 Perbandingan Waktu Komputasi dan Efisiensi Pemangkasan Itemset oleh FP-Max (Colab Notebook 02)</div>
+    </div>
+
+    <p>
+        Hasil Tabel 4.5 mengungkap temuan rekayasa yang kontras dengan asumsi teoretis umum: pada keranjang B2B berdurasi pendek (rata-rata 3,99 item, <code>max_len = 3</code>), implementasi <em>Apriori</em> berbasis operasi matriks vektorisasi NumPy pada pustaka <code>mlxtend</code> beroperasi <strong>100&times; hingga 200&times; lebih cepat</strong> (4,12–93,27 ms) daripada pembangunan pohon prefiks Python pada <em>FP-Growth</em> (417,47–20.725,28 ms), sementara <em>FP-Max</em> terbukti efektif memangkas himpunan item redundan hingga <strong>78,05%</strong> pada level <code>UKURAN</code> dan <strong>19,30%</strong> pada level <code>SERI</code>. Temuan ini menjadi landasan desain agar layanan mikro FastAPI (<code>/api/mine</code>) mampu memproses ulang aturan secara <em>real-time</em> di bawah 100 milidetik.
+    </p>
+    <p>
+        Selanjutnya, penerapan uji signifikansi <em>Fisher’s Exact Test</em> dan koreksi <em>Benjamini-Hochberg</em> (FDR) membuktikan keampuhannya membedakan pola nyata dari kebetulan statistik (lihat Gambar 4.3 dan Tabel 4.6). Pada level makro <code>MERK</code> (349 aturan) dan <code>UKURAN</code> (84 aturan), seluruh aturan gugur setelah koreksi FDR (<strong>0 aturan lolos <em>q</em><sub>BH</sub> &lt; 0,10</strong>), yang mengonfirmasi bahwa kemunculan antar-merek secara umum bersifat mendekati independen. Sebaliknya, pada level spesifik <strong><code>SERI</code></strong> (104 aturan) ditemukan <strong>61 aturan signifikan pada <em>p</em> &lt; 0,05</strong> (72 aturan pada <em>q</em><sub>BH</sub> &lt; 0,10) dan pada level <strong><code>NAMABARA</code></strong> (39 aturan) seluruhnya (39/39) terkonfirmasi signifikan secara statistik.
+    </p>
+
+    <div class="figure-block">
+        <img src="assets/figures/sota_rules_metrics_scatter.png" alt="Scatter Plot Metrik SOTA Level SERI dan Dampak Uji Fisher">
+        <div class="caption-figure">Gambar 4.3 Peta Kualitas Aturan SOTA Level <code>SERI</code> (<em>Zhang’s Metric</em> &amp; <em>Avg DUS</em>) serta Dampak Penyaringan Statistik</div>
+    </div>
+
+    <div class="caption">Tabel 4.6 Top-8 Aturan SOTA Teratas pada Level Utama <code>SERI</code> (<code>Toko + Bulan</code>)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Aturan (<em>A &rArr; C</em>)</th>
+                <th><em>n<sub>AB</sub></em></th>
+                <th>Support</th>
+                <th>Confidence</th>
+                <th>Lift</th>
+                <th>Zhang</th>
+                <th>Avg DUS</th>
+                <th>Utility Score</th>
+                <th><em>p</em>-value Fisher</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>DIEGO &rArr; GRANIT</code></td>
+                <td style="text-align: center;">11</td>
+                <td style="text-align: center;">0,0028</td>
+                <td style="text-align: center;">16,67%</td>
+                <td style="text-align: center;">3,96</td>
+                <td style="text-align: center;">+0,760</td>
+                <td style="text-align: center;">96,09</td>
+                <td style="text-align: center;">0,252</td>
+                <td style="text-align: center;">7,47 &times; 10<sup>&minus;5</sup></td>
+            </tr>
+            <tr>
+                <td><code>SENGGIGI &rArr; AMARILIS</code></td>
+                <td style="text-align: center;">7</td>
+                <td style="text-align: center;">0,0018</td>
+                <td style="text-align: center;">10,94%</td>
+                <td style="text-align: center;"><strong>5,68</strong></td>
+                <td style="text-align: center;"><strong>+0,838</strong></td>
+                <td style="text-align: center;"><strong>113,29</strong></td>
+                <td style="text-align: center;">0,189</td>
+                <td style="text-align: center;">1,91 &times; 10<sup>&minus;4</sup></td>
+            </tr>
+            <tr>
+                <td><code>ELECTRA &rArr; ILUSION</code></td>
+                <td style="text-align: center;">9</td>
+                <td style="text-align: center;">0,0023</td>
+                <td style="text-align: center;">10,34%</td>
+                <td style="text-align: center;">4,26</td>
+                <td style="text-align: center;">+0,782</td>
+                <td style="text-align: center;">105,56</td>
+                <td style="text-align: center;">0,164</td>
+                <td style="text-align: center;">2,18 &times; 10<sup>&minus;4</sup></td>
+            </tr>
+            <tr>
+                <td><code>FOSSIL &rArr; ELYSIUM</code></td>
+                <td style="text-align: center;">7</td>
+                <td style="text-align: center;">0,0018</td>
+                <td style="text-align: center;">11,48%</td>
+                <td style="text-align: center;">4,53</td>
+                <td style="text-align: center;">+0,792</td>
+                <td style="text-align: center;">111,86</td>
+                <td style="text-align: center;">0,186</td>
+                <td style="text-align: center;">7,69 &times; 10<sup>&minus;4</sup></td>
+            </tr>
+            <tr>
+                <td><code>HITAM &rArr; FINO</code></td>
+                <td style="text-align: center;">6</td>
+                <td style="text-align: center;">0,0015</td>
+                <td style="text-align: center;">15,38%</td>
+                <td style="text-align: center;">5,02</td>
+                <td style="text-align: center;">+0,809</td>
+                <td style="text-align: center;">106,50</td>
+                <td style="text-align: center;">0,253</td>
+                <td style="text-align: center;">1,04 &times; 10<sup>&minus;3</sup></td>
+            </tr>
+            <tr>
+                <td><code>SOLIKI &rArr; PEDRA</code></td>
+                <td style="text-align: center;">7</td>
+                <td style="text-align: center;">0,0018</td>
+                <td style="text-align: center;">11,86%</td>
+                <td style="text-align: center;">4,04</td>
+                <td style="text-align: center;">+0,764</td>
+                <td style="text-align: center;">99,00</td>
+                <td style="text-align: center;">0,181</td>
+                <td style="text-align: center;">1,52 &times; 10<sup>&minus;3</sup></td>
+            </tr>
+            <tr>
+                <td><code>PULSAR &rArr; GRANITY</code></td>
+                <td style="text-align: center;">8</td>
+                <td style="text-align: center;">0,0020</td>
+                <td style="text-align: center;">18,60%</td>
+                <td style="text-align: center;">3,43</td>
+                <td style="text-align: center;">+0,717</td>
+                <td style="text-align: center;">94,25</td>
+                <td style="text-align: center;">0,264</td>
+                <td style="text-align: center;">1,82 &times; 10<sup>&minus;3</sup></td>
+            </tr>
+            <tr>
+                <td><code>CUBIC &rArr; MIRANDA</code></td>
+                <td style="text-align: center;">6</td>
+                <td style="text-align: center;">0,0015</td>
+                <td style="text-align: center;"><strong>19,35%</strong></td>
+                <td style="text-align: center;">4,44</td>
+                <td style="text-align: center;">+0,781</td>
+                <td style="text-align: center;">111,67</td>
+                <td style="text-align: center;"><strong>0,310</strong></td>
+                <td style="text-align: center;">1,86 &times; 10<sup>&minus;3</sup></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="caption">Tabel 4.7 Evaluasi Prediktif Temporal (<em>Out-of-Time Validation</em>: Data Latih 14 Bulan vs Data Uji 3 Bulan Terakhir)</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Level Item</th>
+                <th>Rules Latih</th>
+                <th>Cakupan ARM</th>
+                <th>Hit-Rate@5 ARM Murni</th>
+                <th>Hit-Rate@5 Popularitas</th>
+                <th>Hit-Rate@5 Hybrid</th>
+                <th>Precision@5 Hybrid</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>MERK</code></td>
+                <td style="text-align: center;">347</td>
+                <td style="text-align: center;">100,00%</td>
+                <td style="text-align: center;">53,63%</td>
+                <td style="text-align: center;">63,25%</td>
+                <td style="text-align: center;"><strong>66,25%</strong></td>
+                <td style="text-align: center;"><strong>19,94%</strong></td>
+            </tr>
+            <tr>
+                <td><code>MERK_UKURAN</code></td>
+                <td style="text-align: center;">154</td>
+                <td style="text-align: center;">80,25%</td>
+                <td style="text-align: center;">11,76%</td>
+                <td style="text-align: center;">30,09%</td>
+                <td style="text-align: center;"><strong>31,50%</strong></td>
+                <td style="text-align: center;"><strong>7,12%</strong></td>
+            </tr>
+            <tr>
+                <td><code>SERI</code></td>
+                <td style="text-align: center;">143</td>
+                <td style="text-align: center;">44,03%</td>
+                <td style="text-align: center;">3,14%</td>
+                <td style="text-align: center;">19,18%</td>
+                <td style="text-align: center;">18,71%</td>
+                <td style="text-align: center;">3,99%</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        Pada validasi temporal (Tabel 4.7), pendekatan <strong>Hybrid KeraMine (ARM + Popularity Fallback)</strong> mengungguli <em>baseline</em> popularitas murni pada level <code>MERK</code> (<em>Hit-Rate@5</em> naik menjadi <strong>66,25%</strong> dengan <em>Precision@5</em> <strong>19,94%</strong>) dan <code>MERK_UKURAN</code> (<em>Hit-Rate@5</em> naik menjadi <strong>31,50%</strong>). Sementara pada level <code>SERI</code> yang memiliki 220 kelas sangat beragam, cakupan aturan spesifik berada pada 44,03%, sehingga penyertaan mekanisme <em>fallback</em> berlabel transparan terbukti penting untuk menjaga kegunaan sistem rekomendasi di lapangan.
+    </p>
+
+    <h3 class="section-title">4.4 Implementasi Database Cloud Supabase, FastAPI Rule Engine, dan Pipeline Auto-Realtime n8n</h3>
+    <p>
+        Tahap pondasi basis data awan pada <strong>Supabase PostgreSQL</strong> (<em>project</em> <code>odtxjphklgvnpzicsysc</code>) telah berhasil dimigrasikan pada versi <code>20261110162650</code> (<code>create_keramine_initial_schema</code>) dan telah terisi penuh melalui skrip seeder idempoten (<code>data/seed_supabase.py</code>) sebanyak <strong>15.986 baris transaksi</strong> (15.840 positif + 146 <code>QTY = 0</code>), <strong>237 profil toko</strong>, <strong>8 riwayat eksekusi</strong>, dan <strong>784 aturan asosiasi SOTA</strong>. Seluruh tabel mengaktifkan kebijakan <em>Row Level Security</em> (RLS) dan terverifikasi bebas kerentanan keamanan (<code>0 security lints</code>), serta dilengkapi otomasi <em>keep-alive</em> setiap 3 hari (<code>.github/workflows/supabase-keep-alive.yml</code>).
+    </p>
+    <p>
+        Di atas basis data awan tersebut, layanan mikro <strong>FastAPI Rule Engine</strong> (<code>api-engine/</code>) telah dibangun dengan algoritma vektorisasi matriks NumPy dan diuji kontrak numerik terhadap <code>data/clean/arm_fixture.json</code>. Pengujian membuktikan <strong>kesamaan 10/10 aturan referensi</strong> dengan deviasi maksimum <strong>5,551 &times; 10<sup>&minus;17</sup></strong> (jauh di bawah toleransi 10<sup>&minus;6</sup>) dan waktu komputasi nyata <strong>243,79 milidetik</strong> (termasuk perhitungan <em>Zhang’s Metric</em>, <em>Utility-QTY</em>, dan <em>Fisher’s Exact Test + Benjamini-Hochberg</em>).
+    </p>
+    <p>
+        Pada sisi otomasi hilir, alur kerja 7-node <strong>n8n</strong> (<code>n8n/keramine_realtime_pipeline.json</code>) telah diimpor dan dipublikasikan secara aktif pada runtime lokal <strong>n8n v2.8.4</strong> (port <code>5678</code>, ID workflow <code>LPw6W9YXJjI1ktLV</code>). Pengujian <em>end-to-end</em> dilakukan dengan mengirim muatan simulasi transaksi B2B (<code>ABAD BANGUNAN, TOKO</code>, seri <code>DIEGO</code> &amp; <code>GRANIT</code>, 75 DUS) ke endpoint <code>POST http://127.0.0.1:5678/webhook/keramine-ingest</code>. Webhook n8n meneruskan permintaan ke FastAPI <code>/api/simulate-transactions</code>, menyisipkan <strong>2 baris transaksi baru</strong> ke Supabase (<code>15.986 &rarr; 15.988</code> baris), memicu perhitungan ulang aturan level <code>SERI</code> (104 rules, 61 signifikan Fisher) dalam waktu <strong>403,5 ms</strong>, dan mengembalikan respons <code>HTTP 200</code> terstruktur. Pemanggilan fitur <strong>1-Click Reset Demo</strong> (<code>POST /api/reset-demo</code>) menghapus seluruh baris simulasi non-historis dan memulihkan basis data awan tepat kembali ke <strong>15.986 transaksi dan 784 aturan baseline</strong>.
+    </p>
+
+    <h3 class="section-title">4.5 Implementasi Portal B2B Laravel 13 dan Analysis Lab Streamlit (KeraMine)</h3>
+    <p>
+        Sesuai desain arsitektur hibrida yang memisahkan portal operasional B2B dari laboratorium analitik statistik, antarmuka pengguna dibangun menggunakan dua aplikasi terintegrasi:
+    </p>
+    <ul>
+        <li><strong>Portal B2B Laravel 13 (<code>keramine-laravel/</code>, port <code>8000</code>):</strong> Dibangun menggunakan pendekatan Opsi 1 (SQLite lokal untuk tabel <code>users</code>, <code>sessions</code>, dan <code>recommendation_histories</code>) yang berkomunikasi secara aman lewat HTTPS REST API ke Supabase Cloud (dengan sertifikat CA terverifikasi Mozilla <code>cacert.pem</code>) serta HTTP ke FastAPI <code>:8001</code>. Portal menyediakan autentikasi demo 1-klik bagi peran <code>admin</code> dan <code>sales</code> POF (<code>DIAN</code>, <code>ROBBY</code>), penelusuran 237 profil toko &amp; katalog produk, modul Rekomendasi Bundling dengan penyimpanan riwayat &amp; ekspor CSV/cetak, Eksplorasi 784 Aturan SOTA, serta kendali Simulator Pipeline &amp; Reset Demo. Seluruh pengujian otomatis PHPUnit (<strong>7 test cases, 59 assertions</strong>) lulus penuh.</li>
+        <li><strong>Analysis Lab Streamlit (<code>keramine-lab/</code>, port <code>8501</code>):</strong> Menyajikan 5 tab analitik mendalam bagi peneliti dan tim manajemen: (1) Audit Forensik Granularitas &amp; EDA Volume Ukuran, (2) Eksplorasi Aturan Multi-Level &amp; Graf Jaringan Interaktif Plotly + NetworkX, (3) Simulator Rekomendasi &amp; Inspektor Kontingensi 2&times;2 (menampilkan jumlah tepat <code>n(A)</code>, <code>n(B)</code>, <code>n(AB)</code>, nilai <em>p</em>-Fisher dan <em>q</em>-BH), (4) Benchmark SOTA &amp; Evaluasi Temporal <em>Out-of-Time</em>, serta (5) Monitor Live Supabase + Pemicu Simulasi n8n. Uji asap otomatis via <code>streamlit.testing.v1.AppTest</code> lulus tanpa pengecualian (<em>0 exceptions</em>).</li>
+    </ul>
+
+    <div class="figure-block">
+        <img src="assets/screenshots/laravel_home_light.png" alt="Portal B2B Laravel 13 Beranda Light Mode">
+        <div class="caption-figure">Gambar 4.4 Antarmuka Portal B2B Laravel 13 (Beranda Mode Terang dengan Koneksi Live Supabase &amp; FastAPI)</div>
+    </div>
+
+    <div class="figure-block">
+        <img src="assets/screenshots/laravel_recommender_light.png" alt="Mesin Rekomendasi Bundling B2B Laravel">
+        <div class="caption-figure">Gambar 4.5 Modul Mesin Rekomendasi Bundling &amp; Restocking B2B Beserta Indikator Signifikansi Fisher dan Popularity Fallback</div>
+    </div>
+
+    <div class="figure-block">
+        <img src="assets/screenshots/laravel_pipeline_dark.png" alt="Pipeline Orkestrasi FastAPI Supabase n8n Dark Mode">
+        <div class="caption-figure">Gambar 4.6 Antarmuka Orkestrasi Pipeline Real-Time FastAPI, Supabase &amp; n8n (Mode Gelap Opsi B)</div>
+    </div>
+
+    <div class="figure-block">
+        <img src="assets/screenshots/streamlit_lab_eda.png" alt="Dashboard Streamlit Analysis Lab KeraMine">
+        <div class="caption-figure">Gambar 4.7 Dashboard Interaktif Streamlit Analysis Lab KeraMine (Tab Audit Forensik Granularitas &amp; EDA)</div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- BAB 5 KESIMPULAN DAN SARAN                 -->
+    <!-- ========================================== -->
+    <h2 class="chapter-title" style="page-break-before: always;">BAB 5<br>KESIMPULAN DAN SARAN</h2>
+
+    <h3 class="section-title">5.1 Kesimpulan</h3>
+    <ol>
+        <li>Audit forensik terhadap 15.986 baris transaksi aktif distribusi keramik B2B (<code>datasetarule.xlsx</code>) membuktikan bahwa atribut nomor faktur (<code>NOTA</code>) merupakan pengenal baris pengiriman tunggal (15.985 unik dengan 1 tabrakan acak <code>JL*7211.3746</code>) sehingga tidak dapat digunakan sebagai unit keranjang belanja. Transformasi ke unit keranjang periodik <strong><code>Toko + Bulan</code></strong> (setelah memisahkan 146 baris bernilai <code>QTY = 0</code>) berhasil membentuk <strong>3.949 keranjang aktif</strong> dengan proporsi <strong>92,53% multi-item</strong> (rata-rata 3,99 SKU per keranjang).</li>
+        <li>Representasi produk secara hierarkis mengungkap bahwa pola pada level <code>UKURAN</code> memiliki frekuensi sangat tinggi (<code>40X40</code> mencapai 255.854 DUS), level <code>MERK</code> (21 merek bersih pasca-penyatuan 725 baris <code>PISSCASO &rarr; PICASSO</code>) memiliki distribusi mendekati seragam (<em>Lift</em> &le; 1,20 dan 0 aturan lolos koreksi FDR-BH), sedangkan level <strong><code>SERI</code> (220 seri motif)</strong> menghasilkan 104 aturan kandidat dengan 61 aturan lolos <em>Fisher’s Exact Test</em> (<em>p</em> &lt; 0,05) dan 72 aturan lolos <em>q</em><sub>BH</sub> &lt; 0,10 (mis. <code>DIEGO &rArr; GRANIT</code>, <em>Lift</em> 3,96, <em>Zhang</em> +0,760; <code>CUBIC &rArr; MIRANDA</code>, <em>Utility Score</em> 0,310).</li>
+        <li>Pada komparasi algoritma SOTA, <em>Apriori</em> berbasis vektorisasi NumPy pada <code>mlxtend</code> beroperasi paling cepat (4,12–93,27 ms) untuk keranjang B2B berdurasi pendek, sementara <em>FP-Max</em> efektif memangkas itemset redundan hingga 78,05% pada level <code>UKURAN</code> dan 19,30% pada level <code>SERI</code>. Pada validasi temporal <em>out-of-time</em>, pendekatan <em>Hybrid KeraMine</em> mengungguli popularitas murni dengan <em>Hit-Rate@5</em> sebesar <strong>66,25%</strong> (<code>MERK</code>) dan <strong>31,50%</strong> (<code>MERK_UKURAN</code>).</li>
+        <li>Arsitektur operasional hibrida <strong>FastAPI (:8001) + Supabase PostgreSQL + n8n (:5678) + Laravel 13 Portal B2B (:8000) + Streamlit Analysis Lab (:8501)</strong> beroperasi terintegrasi penuh dengan paritas numerik terhadap keluaran Google Colab sebesar <strong>5,551 &times; 10<sup>&minus;17</sup></strong>. Alur otomasi 7-node n8n (<code>/webhook/keramine-ingest</code>) terbukti memproses simulasi transaksi baru hingga memicu re-mining di Supabase dalam <strong>403,5 milidetik</strong>, sementara portal Laravel (7/7 PHPUnit pass) dan Streamlit Lab (AppTest 0 error) menyediakan fitur rekomendasi transparan, ekspor CSV, serta mekanisme <em>1-Click Reset Demo</em> kembali ke baseline 15.986 transaksi dan 784 aturan.</li>
+    </ol>
+
+    <h3 class="section-title">5.2 Saran</h3>
+    <ol>
+        <li>Perusahaan distributor disarankan menambahkan pencatatan <em>Order Header ID</em> (nomor surat pesanan induk) pada sistem ERP agar pesanan yang dikirim dalam beberapa faktur pengiriman pada hari yang sama tetap terhubung dalam satu keranjang pesanan asli.</li>
+        <li>Pengembangan lanjutan dapat menambahkan informasi harga satuan per kardus dan margin keuntungan per SKU sehingga modul <em>Utility-Weighted Association Rules</em> dapat menghitung nilai keuntungan finansial bersih (Rupiah) di samping volume fisik kardus (<code>DUS</code>).</li>
+    </ol>
+
+    <!-- ========================================== -->
+    <!-- DAFTAR PUSTAKA                             -->
+    <!-- ========================================== -->
+    <h2 class="chapter-title" style="page-break-before: always; margin-top: 50px;">DAFTAR PUSTAKA</h2>
+
+    <p class="ref-item">
+        Agrawal, R., Imieli&#324;ski, T., &amp; Swami, A. (1993). Mining association rules between sets of items in large databases. <em>Proceedings of the 1993 ACM SIGMOD International Conference on Management of Data</em>, 207–216.
+    </p>
+    <p class="ref-item">
+        Agrawal, R., &amp; Srikant, R. (1994). Fast algorithms for mining association rules in large databases. <em>Proceedings of the 20th International Conference on Very Large Data Bases (VLDB)</em>, 487–499.
+    </p>
+    <p class="ref-item">
+        Benjamini, Y., &amp; Hochberg, Y. (1995). Controlling the false discovery rate: A practical and powerful approach to multiple testing. <em>Journal of the Royal Statistical Society: Series B (Methodological)</em>, 57(1), 289–300.
+    </p>
+    <p class="ref-item">
+        Fournier-Viger, P., Lin, J. C.-W., Vo, B., Chi, T. T., Zhang, J., &amp; Le, H. B. (2022). A survey of itemset mining. <em>WIREs Data Mining and Knowledge Discovery</em>, 12(4), e1207.
+    </p>
+    <p class="ref-item">
+        Gan, W., Lin, J. C.-W., Fournier-Viger, P., Chao, H.-C., Tseng, V. S., &amp; Yu, P. S. (2021). A survey of utility-oriented pattern mining. <em>IEEE Transactions on Knowledge and Data Engineering</em>, 33(4), 1306–1327.
+    </p>
+    <p class="ref-item">
+        Grahne, G., &amp; Zhu, J. (2003). Efficiently using prefix-trees in mining frequent itemsets (FPmax). <em>Proceedings of the IEEE ICDM Workshop on Frequent Itemset Mining Implementations (FIMI)</em>, 90, 65–74.
+    </p>
+    <p class="ref-item">
+        H&auml;m&auml;l&auml;inen, W., &amp; Webb, G. I. (2019). A tutorial on statistically sound pattern discovery. <em>Data Mining and Knowledge Discovery</em>, 33(2), 325–377.
+    </p>
+    <p class="ref-item">
+        Han, J., Pei, J., &amp; Yin, Y. (2000). Mining frequent patterns without candidate generation. <em>ACM SIGMOD Record</em>, 29(2), 1–12.
+    </p>
+    <p class="ref-item">
+        North, M. (2016). <em>Data Mining for the Masses</em> (2nd ed.). Athens, GA: Global Text Project.
+    </p>
+    <p class="ref-item">
+        Zhang, T. (2000). Association rules. In <em>Knowledge Discovery and Data Mining: Current Issues and New Applications (PAKDD 2000)</em> (pp. 245–256). Springer Lecture Notes in Computer Science.
+    </p>
+
+</div>
+
+</body>
+</html>
+

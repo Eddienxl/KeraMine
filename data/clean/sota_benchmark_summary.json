@@ -1,0 +1,171 @@
+{
+  "algorithm_benchmark_store_month": [
+    {
+      "item_level": "MERK",
+      "unique_items": 21,
+      "min_support": 0.02,
+      "apriori_ms": 45.47,
+      "fpgrowth_ms": 5108.98,
+      "fpmax_ms": 2685.72,
+      "speedup_fp_vs_apriori": 0.01,
+      "itemsets_apriori_fp": 231,
+      "itemsets_fpmax": 210,
+      "fpmax_pruning_pct": 9.09
+    },
+    {
+      "item_level": "UKURAN",
+      "unique_items": 8,
+      "min_support": 0.02,
+      "apriori_ms": 4.12,
+      "fpgrowth_ms": 417.47,
+      "fpmax_ms": 125.77,
+      "speedup_fp_vs_apriori": 0.01,
+      "itemsets_apriori_fp": 41,
+      "itemsets_fpmax": 9,
+      "fpmax_pruning_pct": 78.05
+    },
+    {
+      "item_level": "MERK_UKURAN",
+      "unique_items": 168,
+      "min_support": 0.002,
+      "apriori_ms": 93.27,
+      "fpgrowth_ms": 20725.28,
+      "fpmax_ms": 18999.11,
+      "speedup_fp_vs_apriori": 0.0,
+      "itemsets_apriori_fp": 1603,
+      "itemsets_fpmax": 1519,
+      "fpmax_pruning_pct": 5.24
+    },
+    {
+      "item_level": "SERI",
+      "unique_items": 220,
+      "min_support": 0.0015,
+      "apriori_ms": 41.4,
+      "fpgrowth_ms": 8997.88,
+      "fpmax_ms": 6741.14,
+      "speedup_fp_vs_apriori": 0.0,
+      "itemsets_apriori_fp": 746,
+      "itemsets_fpmax": 602,
+      "fpmax_pruning_pct": 19.3
+    },
+    {
+      "item_level": "NAMABARA",
+      "unique_items": 438,
+      "min_support": 0.001,
+      "apriori_ms": 56.11,
+      "fpgrowth_ms": 1055.25,
+      "fpmax_ms": 1122.43,
+      "speedup_fp_vs_apriori": 0.05,
+      "itemsets_apriori_fp": 474,
+      "itemsets_fpmax": 409,
+      "fpmax_pruning_pct": 13.71
+    }
+  ],
+  "mining_runs_summary": [
+    {
+      "basket_type": "store_month",
+      "item_level": "MERK",
+      "min_support": 0.02,
+      "min_confidence": 0.15,
+      "total_baskets": 3949,
+      "rules_found": 349,
+      "fisher_p_lt_005": 14,
+      "fdr_bh_q_lt_010": 0,
+      "max_lift": 1.197,
+      "max_zhang": 0.198,
+      "exec_time_ms": 2933.82
+    },
+    {
+      "basket_type": "store_month",
+      "item_level": "UKURAN",
+      "min_support": 0.02,
+      "min_confidence": 0.2,
+      "total_baskets": 3949,
+      "rules_found": 84,
+      "fisher_p_lt_005": 2,
+      "fdr_bh_q_lt_010": 0,
+      "max_lift": 1.109,
+      "max_zhang": 0.106,
+      "exec_time_ms": 492.97
+    },
+    {
+      "basket_type": "store_month",
+      "item_level": "MERK_UKURAN",
+      "min_support": 0.002,
+      "min_confidence": 0.1,
+      "total_baskets": 3949,
+      "rules_found": 127,
+      "fisher_p_lt_005": 34,
+      "fdr_bh_q_lt_010": 27,
+      "max_lift": 2.79,
+      "max_zhang": 0.66,
+      "exec_time_ms": 20096.4
+    },
+    {
+      "basket_type": "store_month",
+      "item_level": "SERI",
+      "min_support": 0.0015,
+      "min_confidence": 0.1,
+      "total_baskets": 3949,
+      "rules_found": 104,
+      "fisher_p_lt_005": 61,
+      "fdr_bh_q_lt_010": 72,
+      "max_lift": 5.683,
+      "max_zhang": 0.838,
+      "exec_time_ms": 7529.69
+    },
+    {
+      "basket_type": "store_month",
+      "item_level": "NAMABARA",
+      "min_support": 0.001,
+      "min_confidence": 0.1,
+      "total_baskets": 3949,
+      "rules_found": 39,
+      "fisher_p_lt_005": 39,
+      "fdr_bh_q_lt_010": 39,
+      "max_lift": 16.118,
+      "max_zhang": 0.946,
+      "exec_time_ms": 629.05
+    },
+    {
+      "basket_type": "store_week",
+      "item_level": "MERK",
+      "min_support": 0.002,
+      "min_confidence": 0.05,
+      "total_baskets": 10475,
+      "rules_found": 57,
+      "fisher_p_lt_005": 0,
+      "fdr_bh_q_lt_010": 0,
+      "max_lift": 0.97,
+      "max_zhang": -0.032,
+      "exec_time_ms": 8397.82
+    },
+    {
+      "basket_type": "store_week",
+      "item_level": "MERK_UKURAN",
+      "min_support": 0.0004,
+      "min_confidence": 0.05,
+      "total_baskets": 10475,
+      "rules_found": 6,
+      "fisher_p_lt_005": 2,
+      "fdr_bh_q_lt_010": 1,
+      "max_lift": 2.951,
+      "max_zhang": 0.667,
+      "exec_time_ms": 7025.87
+    },
+    {
+      "basket_type": "store_week",
+      "item_level": "SERI",
+      "min_support": 0.0003,
+      "min_confidence": 0.05,
+      "total_baskets": 10475,
+      "rules_found": 18,
+      "fisher_p_lt_005": 14,
+      "fdr_bh_q_lt_010": 15,
+      "max_lift": 16.627,
+      "max_zhang": 0.946,
+      "exec_time_ms": 2465.47
+    }
+  ],
+  "total_rules_exported": 784
+}

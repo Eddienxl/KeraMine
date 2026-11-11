@@ -1,0 +1,33 @@
+name: Supabase Keep-Alive (Anti-Pause 7 Days)
+
+on:
+  schedule:
+    # Menjalankan ping query setiap 3 hari pukul 00:00 UTC (aman sebelum batas idle 7 hari)
+    - cron: '0 0 */3 * *'
+  workflow_dispatch: # Dapat dipicu manual kapan saja dari tab GitHub Actions
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query ringan PostgREST agar timer aktivitas Postgres ter-reset
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ] || [ -z "$SUPABASE_KEY" ]; then
+            echo "Error: Secrets SUPABASE_URL atau SUPABASE_PUBLISHABLE_KEY belum diatur di GitHub Repository Secrets."
+            exit 1
+          fi
+          HTTP_CODE=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/keramine_mining_runs?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}")
+          echo "HTTP Status: $HTTP_CODE"
+          cat /tmp/resp.json
+          echo ""
+          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
+            echo "Ping Supabase gagal dengan status $HTTP_CODE"
+            exit 1
+          fi
+
