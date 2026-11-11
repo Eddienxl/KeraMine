@@ -1,6 +1,6 @@
 # KeraMine — B2B Ceramic Restocking & Bundling Recommendation System
 
-![KeraMine Laravel Portal B2B](assets/screenshots/laravel_home_light.png)
+![KeraMine Laravel Portal B2B Dark Mode](assets/screenshots/laravel_home_dark.png)
 
 **KeraMine** is a bilingual (**Indonesian / English**) Multi-Level **State-of-the-Art (SOTA) Association Rule Mining** platform built for wholesale B2B ceramic distribution (**15,840 clean positive transactions**, **794,064 DUS**, **237 partner stores**, **4 Sales POFs**).
 
