@@ -2,15 +2,17 @@ name: Supabase Keep-Alive (Anti-Pause 7 Days)
 
 on:
   schedule:
-    # Menjalankan ping query setiap 3 hari pukul 00:00 UTC (aman sebelum batas idle 7 hari)
-    - cron: '0 0 */3 * *'
+    # Berjalan 2x sehari pada pukul 02:15 UTC & 14:15 UTC (09:15 WIB & 21:15 WIB).
+    # Memenuhi ketentuan resmi Supabase: "a few user requests to the database each day"
+    # Menggunakan menit non-00 (:15) untuk menghindari delay antrean runner gratis GitHub.
+    - cron: '15 2,14 * * *'
   workflow_dispatch: # Dapat dipicu manual kapan saja dari tab GitHub Actions
 
 jobs:
   keep-alive:
     runs-on: ubuntu-latest
     steps:
-      - name: Query ringan PostgREST agar timer aktivitas Postgres ter-reset
+      - name: Eksekusi Multi-Table Database Activity Scan (PostgREST + Postgres Compute)
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
           SUPABASE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
@@ -19,15 +21,65 @@ jobs:
             echo "Error: Secrets SUPABASE_URL atau SUPABASE_PUBLISHABLE_KEY belum diatur di GitHub Repository Secrets."
             exit 1
           fi
-          HTTP_CODE=$(curl -s -o /tmp/resp.json -w "%{http_code}" \
-            "${SUPABASE_URL}/rest/v1/keramine_mining_runs?select=id&limit=1" \
+
+          echo "=========================================================="
+          echo "KERAMINE SUPABASE KEEP-ALIVE HEARTBEAT & DATABASE ACTIVITY"
+          echo "Target URL      : ${SUPABASE_URL}"
+          echo "Timestamp (UTC) : $(date -u)"
+          echo "=========================================================="
+
+          # 1. Query & Scan keramine_rules (Count exact scan index)
+          RULES_RESP=$(curl -s -D /tmp/rules_headers.txt -o /tmp/rules.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/keramine_rules?select=id,consequents_str,lift&limit=5&lift=gte.1.0" \
             -H "apikey: ${SUPABASE_KEY}" \
-            -H "Authorization: Bearer ${SUPABASE_KEY}")
-          echo "HTTP Status: $HTTP_CODE"
-          cat /tmp/resp.json
-          echo ""
-          if [ "$HTTP_CODE" -lt 200 ] || [ "$HTTP_CODE" -ge 300 ]; then
-            echo "Ping Supabase gagal dengan status $HTTP_CODE"
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            -H "Pragma: no-cache" \
+            -H "Prefer: count=exact")
+          RULES_COUNT=$(grep -i "content-range:" /tmp/rules_headers.txt | tr -d '\r' | awk '{print $2}')
+          echo "[1/4] keramine_rules: HTTP $RULES_RESP (Content-Range: $RULES_COUNT)"
+
+          # 2. Query & Scan keramine_transactions (15.840 baris transaksi)
+          TX_RESP=$(curl -s -D /tmp/tx_headers.txt -o /tmp/tx.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/keramine_transactions?select=id,nota,nama_toko,qty&limit=5" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            -H "Pragma: no-cache" \
+            -H "Prefer: count=exact")
+          TX_COUNT=$(grep -i "content-range:" /tmp/tx_headers.txt | tr -d '\r' | awk '{print $2}')
+          echo "[2/4] keramine_transactions: HTTP $TX_RESP (Content-Range: $TX_COUNT)"
+
+          # 3. Query & Scan keramine_store_profiles (237 profil toko)
+          STORE_RESP=$(curl -s -D /tmp/store_headers.txt -o /tmp/store.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/keramine_store_profiles?select=nama_toko,total_transactions&limit=5" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            -H "Pragma: no-cache" \
+            -H "Prefer: count=exact")
+          STORE_COUNT=$(grep -i "content-range:" /tmp/store_headers.txt | tr -d '\r' | awk '{print $2}')
+          echo "[3/4] keramine_store_profiles: HTTP $STORE_RESP (Content-Range: $STORE_COUNT)"
+
+          # 4. Query & Scan keramine_mining_runs (Riwayat run mining)
+          RUNS_RESP=$(curl -s -D /tmp/runs_headers.txt -o /tmp/runs.json -w "%{http_code}" \
+            "${SUPABASE_URL}/rest/v1/keramine_mining_runs?select=id,triggered_by,algorithm,rules_found&limit=1" \
+            -H "apikey: ${SUPABASE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_KEY}" \
+            -H "Cache-Control: no-cache, no-store, must-revalidate" \
+            -H "Pragma: no-cache" \
+            -H "Prefer: count=exact")
+          RUNS_COUNT=$(grep -i "content-range:" /tmp/runs_headers.txt | tr -d '\r' | awk '{print $2}')
+          echo "[4/4] keramine_mining_runs: HTTP $RUNS_RESP (Content-Range: $RUNS_COUNT)"
+
+          echo "=========================================================="
+          if [ "$RULES_RESP" -ge 200 ] && [ "$RULES_RESP" -lt 300 ] && \
+             [ "$TX_RESP" -ge 200 ] && [ "$TX_RESP" -lt 300 ] && \
+             [ "$STORE_RESP" -ge 200 ] && [ "$STORE_RESP" -lt 300 ] && \
+             [ "$RUNS_RESP" -ge 200 ] && [ "$RUNS_RESP" -lt 300 ]; then
+            echo "STATUS: SUCCESS - Aktivitas database PostgreSQL Supabase terdaftar aktif."
+            exit 0
+          else
+            echo "STATUS: FAILED - Salah satu endpoint gagal mengembalikan kode HTTP 2xx."
             exit 1
           fi
-
